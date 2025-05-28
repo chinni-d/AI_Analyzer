@@ -6,7 +6,8 @@ import { usePathname } from "next/navigation"
 import { FileText, Menu, X } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet"
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden"
 import { ThemeToggle } from "@/components/theme-toggle"
 
 const navItems = [
@@ -43,7 +44,8 @@ export function MainNav() {
               <span className="sr-only">Toggle menu</span>
             </Button>
           </SheetTrigger>
-          <SheetContent side="left" className="w-[280px] pr-0">
+          <SheetContent side="left" className="w-[250px] pr-0">
+            <SheetTitle className="sr-only">Main Navigation</SheetTitle>
             <div className="flex flex-col space-y-6 py-4">
               <div className="flex items-center justify-between px-4">
                 <Link href="/" className="flex items-center gap-2" onClick={handleNavItemClick}>
@@ -53,7 +55,6 @@ export function MainNav() {
                   <span className="font-semibold">Document QA</span>
                 </Link>
                 <Button variant="ghost" size="icon" onClick={() => setOpen(false)}>
-                  <X className="h-5 w-5" />
                   <span className="sr-only">Close</span>
                 </Button>
               </div>
