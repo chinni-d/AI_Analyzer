@@ -19,6 +19,7 @@ interface Message {
 }
 
 export default function ChatPage() {
+  const fileInputRef = useRef<HTMLInputElement>(null)
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
@@ -29,11 +30,7 @@ export default function ChatPage() {
     },
   ])
   const [inputValue, setInputValue] = useState("")
-  const [uploadedFiles, setUploadedFiles] = useState<string[]>([
-    "Financial_Report_Q3_2024.pdf",
-    "Research_Paper_AI_Trends.docx",
-    "Meeting_Notes_Project_Alpha.txt",
-  ])
+  const [uploadedFiles, setUploadedFiles] = useState<string[]>([])
   const [isTyping, setIsTyping] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
@@ -89,8 +86,8 @@ export default function ChatPage() {
   ]
 
   return (
-    <div className="container mx-auto py-6 px-4 max-w-7xl">
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 h-[calc(100vh-140px)]">
+    <div className="container mx-auto py-6 px-4 max-w-7xl min-h-[60vh] pb-32">
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         {/* Sidebar */}
         <div className="lg:col-span-1 space-y-4">
           {/* Upload Section */}
@@ -102,7 +99,25 @@ export default function ChatPage() {
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <Button className="w-full" variant="outline" size="sm">
+              <input
+                type="file"
+                multiple
+                accept=".pdf,.doc,.docx,.txt"
+                style={{ display: "none" }}
+                ref={fileInputRef}
+                onChange={e => {
+                  const files = e.target.files;
+                  if (!files) return;
+                  const fileNames = Array.from(files).map(f => f.name);
+                  setUploadedFiles(prev => [...prev, ...fileNames]);
+                }}
+              />
+              <Button
+                className="w-full"
+                variant="outline"
+                size="sm"
+                onClick={() => fileInputRef.current?.click()}
+              >
                 <Upload className="h-4 w-4 mr-2" />
                 Upload Files
               </Button>
