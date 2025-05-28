@@ -140,7 +140,7 @@ export default function ChatPage() {
   }
 
   const sampleQuestions = [
-    "What are the main topics covered in the documents?",
+    "What are the main topics covered in the document?",
     "Can you summarize the key findings?",
     "What methodology was used in the research?",
     "Extract the financial highlights from Q3 report",
@@ -237,18 +237,18 @@ export default function ChatPage() {
           {/* Sample Questions */}
           <Card className="hidden lg:block">
             <CardHeader className="pb-3">
-              <CardTitle className="text-sm">Sample Questions</CardTitle>
+              <CardTitle className="text-sm font-bold text-primary">Sample Questions</CardTitle>
             </CardHeader>
             <CardContent className="space-y-2">
-              {sampleQuestions.slice(0, 3).map((question, index) => (
+              {sampleQuestions.map((question, index) => (
                 <Button
                   key={index}
-                  variant="ghost"
+                  variant="outline"
                   size="sm"
-                  className="w-full justify-start text-left h-auto p-2 text-xs"
+                  className="w-full justify-start text-left h-auto p-3 text-sm font-medium hover:bg-primary hover:text-primary-foreground transition-colors whitespace-normal"
                   onClick={() => setInputValue(question)}
                 >
-                  <span className="line-clamp-2">{question}</span>
+                  {question}
                 </Button>
               ))}
             </CardContent>
