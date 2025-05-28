@@ -353,11 +353,12 @@ export default function ChatPage() {
                   <div className="flex-1 relative">
                     <Textarea
                       ref={textareaRef}
-                      placeholder="Ask a question about your documents..."
+                      placeholder="Ask a question..."
                       value={inputValue}
                       onChange={(e) => setInputValue(e.target.value)}
                       onKeyPress={handleKeyPress}
-                      className="min-h-[44px] max-h-32 resize-none pr-12"
+                      className="min-h-[44px] max-h-32 resize-none pr-12 text-sm lg:text-base"
+                      style={{ fontSize: '16px', caretColor: 'auto' }} // Ensure consistent font size and caret color
                       rows={1}
                     />
                     <Button variant="ghost" size="icon" className="absolute right-1 top-1 h-8 w-8">
@@ -373,7 +374,7 @@ export default function ChatPage() {
                     <Send className="h-4 w-4" />
                   </Button>
                 </div>
-                <p className="text-xs text-muted-foreground mt-2">Press Enter to send, Shift+Enter for new line</p>
+                <p className="text-xs text-muted-foreground mt-2 hidden lg:block">Press Enter to send, Shift+Enter for new line</p>
               </div>
             </CardContent>
           </Card>
