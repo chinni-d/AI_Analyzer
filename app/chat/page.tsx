@@ -147,6 +147,13 @@ export default function ChatPage() {
     "What are the action items from the meeting notes?",
   ]
 
+  useEffect(() => {
+    const container = document.querySelector('.overflow-y-auto');
+    if (container) {
+      container.scrollTop = container.scrollHeight;
+    }
+  }, [messages]);
+
   return (
     <div className="container mx-auto py-6 px-4 max-w-7xl min-h-[60vh] pb-40">
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
