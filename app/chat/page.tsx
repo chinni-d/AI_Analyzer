@@ -55,14 +55,6 @@ export default function ChatPage() {
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
-  }
-
-  useEffect(() => {
-    scrollToBottom()
-  }, [messages])
-
   const handleSendMessage = async () => {
   if (!inputValue.trim()) return;
 
@@ -156,7 +148,7 @@ export default function ChatPage() {
   ]
 
   return (
-    <div className="container mx-auto py-6 px-4 max-w-7xl min-h-[60vh] pb-32">
+    <div className="container mx-auto py-6 px-4 max-w-7xl min-h-[60vh] pb-40">
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         {/* Sidebar */}
         <div className="lg:col-span-1 space-y-4">
@@ -257,8 +249,8 @@ export default function ChatPage() {
         </div>
 
         {/* Main Chat Area */}
-        <div className="lg:col-span-3 flex flex-col">
-          <Card className="flex-1 flex flex-col">
+        <div className="lg:col-span-3 flex flex-col h-[calc(100vh-120px)] overflow-hidden">
+          <Card className="flex-1 flex flex-col h-full">
             <CardHeader className="border-b">
               <div className="flex items-center justify-between">
                 <div>
@@ -282,9 +274,9 @@ export default function ChatPage() {
               </div>
             </CardHeader>
 
-            <CardContent className="flex-1 flex flex-col p-0">
-              <ScrollArea className="flex-1 p-4">
-                <div className="space-y-6">
+            <CardContent className="flex-1 flex flex-col p-0 overflow-hidden">
+              <div className="flex-1 overflow-y-auto p-4">
+                <div className="space-y-6 break-words">
                   {messages.map((message) => (
                     <div key={message.id} className="group">
                       <div className={`flex gap-4 ${message.type === "user" ? "justify-end" : "justify-start"}`}>
@@ -294,7 +286,7 @@ export default function ChatPage() {
                           </div>
                           <div className="flex-1 space-y-2">
                             <div className={`rounded-2xl px-4 py-3 ${message.type === "user" ? "bg-primary text-primary-foreground ml-4" : "bg-muted mr-4"}`}>
-                              <p className="text-sm leading-relaxed whitespace-pre-wrap">{message.content}</p>
+                              <p className="text-sm leading-relaxed whitespace-pre-wrap break-words">{message.content}</p>
                             </div>
                             <div className={`flex items-center gap-2 text-xs text-muted-foreground ${message.type === "user" ? "justify-end mr-4" : "justify-start ml-4"}`}>
                               <span>{message.timeString}</span>
@@ -328,7 +320,7 @@ export default function ChatPage() {
                   )}
                   <div ref={messagesEndRef} />
                 </div>
-              </ScrollArea>
+              </div>
 
               {/* Sample Questions for Mobile */}
               <div className="lg:hidden p-4 border-t bg-muted/30">
