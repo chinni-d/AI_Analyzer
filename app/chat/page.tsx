@@ -91,7 +91,7 @@ export default function ChatPage() {
     }
     formData.append("question", inputValue);
 
-    const response = await fetch("http://localhost:8000/ask", {
+    const response = await fetch("http://127.0.0.1:8000/ask", {
       method: "POST",
       body: formData,
     });
@@ -160,7 +160,7 @@ export default function ChatPage() {
         {/* Sidebar */}
         <div className="lg:col-span-1 space-y-4">
           {/* Upload Section */}
-          <Card>
+          <Card className="bg-transparent">
             <CardHeader className="pb-3">
               <CardTitle className="text-lg flex items-center gap-2">
                 <FileText className="h-5 w-5" />
@@ -187,12 +187,12 @@ export default function ChatPage() {
                 size="sm"
                 onClick={() => fileInputRef.current?.click()}
               >
-                <Upload className="h-4 w-4 mr-2" />
+                <Upload className="h-4 w-4 mr-2 " />
                 Upload Files
               </Button>
               <Separator />
               <div className="space-y-2">
-                <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
+                <p className="text-xs font-medium text-black dark:text-white uppercase tracking-wide">
                   Uploaded ({uploadedFiles.length})
                 </p>
                 {uploadedFiles.map((file, index) => (
@@ -235,7 +235,7 @@ export default function ChatPage() {
           </Card>
 
           {/* Sample Questions */}
-          <Card className="hidden lg:block">
+          <Card className="hidden lg:block bg-transparent">
             <CardHeader className="pb-3">
               <CardTitle className="text-sm font-bold text-primary">Sample Questions</CardTitle>
             </CardHeader>
@@ -257,12 +257,12 @@ export default function ChatPage() {
 
         {/* Main Chat Area */}
         <div className="lg:col-span-3 flex flex-col h-[calc(100vh-120px)] overflow-hidden">
-          <Card className="flex-1 flex flex-col h-full">
+          <Card className="flex-1 flex flex-col h-full bg-transparent">
             <CardHeader className="border-b">
               <div className="flex items-center justify-between">
                 <div>
                   <CardTitle className="text-xl">Chat with Your Documents</CardTitle>
-                  <p className="text-sm text-muted-foreground mt-1">
+                  <p className="text-sm text-black dark:text-white mt-1">
                     Ask questions and get AI-powered insights from your uploaded documents
                   </p>
                 </div>

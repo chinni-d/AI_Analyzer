@@ -1,4 +1,5 @@
 "use client"
+
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { ArrowRight, Upload, MessageSquare, Brain } from "lucide-react"
@@ -8,16 +9,16 @@ import { motion } from "framer-motion"
 
 export default function HomePage() {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen overflow-y-auto">
       <div className="flex-1 p-4 md:p-6 lg:p-8">
         <div className="max-w-4xl mx-auto space-y-8">
           {/* Hero Section */}
           <div className="text-center space-y-4 mt-12">
-            <MorphingText texts={["Welcome","to","AI"]}></MorphingText>
+            <MorphingText texts={["Welcome", "to", "AI"]} />
             <h1 className="text-xl md:text-xl lg:text-xl font-bold tracking-tight">
               Ask Questions About Your Documents
             </h1>
-            <p className="text-base md:text-base text-muted-foreground max-w-base mx-auto">
+            <p className="text-base md:text-base max-w-base mx-auto text-black dark:text-white">
               Upload your documents and get instant, accurate answers using advanced Retrieval-Augmented Generation
               (RAG) technology.
             </p>
@@ -39,46 +40,46 @@ export default function HomePage() {
 
           {/* Features Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16">
-            <Card className="text-center">
+            <Card className="text-center bg-transparent shadow-none">
               <CardHeader>
                 <div className="mx-auto w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
                   <Upload className="h-6 w-6 text-primary" />
                 </div>
                 <CardTitle>Upload Documents</CardTitle>
-                <CardDescription>Support for PDF, Word, and text files</CardDescription>
+                <CardDescription className="text-black dark:text-white">Support for PDF, Word, and text files</CardDescription>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-sm text-black dark:text-white">
                   Easily upload your documents and let our AI process them for intelligent querying.
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="text-center">
+            <Card className="text-center bg-transparent shadow-none">
               <CardHeader>
                 <div className="mx-auto w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
                   <MessageSquare className="h-6 w-6 text-primary" />
                 </div>
                 <CardTitle>Ask Questions</CardTitle>
-                <CardDescription>Natural language queries</CardDescription>
+                <CardDescription className="text-black dark:text-white">Natural language queries</CardDescription>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-sm text-black dark:text-white">
                   Ask questions in plain English and get precise answers from your documents.
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="text-center">
+            <Card className="text-center bg-transparent shadow-none">
               <CardHeader>
                 <div className="mx-auto w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
                   <Brain className="h-6 w-6 text-primary" />
                 </div>
                 <CardTitle>AI-Powered</CardTitle>
-                <CardDescription>Advanced RAG technology</CardDescription>
+                <CardDescription className="text-black dark:text-white">Advanced RAG technology</CardDescription>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-sm text-black dark:text-white">
                   Powered by state-of-the-art retrieval and generation models for accurate responses.
                 </p>
               </CardContent>

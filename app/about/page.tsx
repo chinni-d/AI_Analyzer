@@ -14,7 +14,7 @@ export default function AboutPage() {
         {/* Header */}
         <div className="text-center space-y-4">
           <h1 className="text-4xl font-bold tracking-tight"><SparklesText text="About Document QA Generator" /></h1>
-          <p className="text-base text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-base text-black dark:text-white max-w-3xl mx-auto">
             Learn about our RAG-powered document analysis system and the technology behind intelligent document
             processing
           </p>
@@ -25,7 +25,7 @@ export default function AboutPage() {
           whileHover={{ scale: 1.015 }}
           className="block-container"
         >
-          <Card>
+          <Card className="bg-transparent">
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-2xl">
                 <Brain className="h-6 w-6" />
@@ -33,7 +33,7 @@ export default function AboutPage() {
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
-              <p className="text-muted-foreground leading-relaxed text-sm lg:text-base"> 
+              <p className="text-black dark:text-white leading-relaxed text-sm lg:text-base"> 
                 The Document QA Generator is an advanced AI-powered application that enables users to upload documents and
                 ask natural language questions about their content. Built using cutting-edge Retrieval-Augmented
                 Generation (RAG) architecture, it combines the power of information retrieval with large language models
@@ -68,13 +68,13 @@ export default function AboutPage() {
           whileHover={{ scale: 1.015 }}
           className="block-container"
         >
-          <Card>
+          <Card className="bg-transparent">
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-2xl">
                 <Database className="h-6 w-6" />
                 RAG Architecture
               </CardTitle>
-              <CardDescription className="text-base">
+              <CardDescription className="text-base text-black dark:text-white">
                 Retrieval-Augmented Generation combines retrieval and generation for accurate responses
               </CardDescription>
             </CardHeader>
@@ -85,7 +85,7 @@ export default function AboutPage() {
                     <Search className="h-8 w-8 text-blue-600 dark:text-blue-400" />
                   </div>
                   <h3 className="text-xl font-semibold">1. Retrieval</h3>
-                  <p className="text-muted-foreground text-sm lg:text-base">
+                  <p className="text-black dark:text-white text-sm lg:text-base">
                     Relevant document chunks are retrieved based on semantic similarity to the user's question using
                     advanced vector search.
                   </p>
@@ -96,7 +96,7 @@ export default function AboutPage() {
                     <Brain className="h-8 w-8 text-green-600 dark:text-green-400" />
                   </div>
                   <h3 className="text-xl font-semibold">2. Augmentation</h3>
-                  <p className="text-muted-foreground text-sm lg:text-base">
+                  <p className="text-black dark:text-white text-sm lg:text-base">
                     Retrieved context is combined with the user's question to create an enhanced prompt with relevant
                     information.
                   </p>
@@ -107,7 +107,7 @@ export default function AboutPage() {
                     <Zap className="h-8 w-8 text-purple-600 dark:text-purple-400" />
                   </div>
                   <h3 className="text-xl font-semibold">3. Generation</h3>
-                  <p className="text-muted-foreground text-sm lg:text-base">
+                  <p className="text-black dark:text-white text-sm lg:text-base">
                     A large language model generates accurate, contextual answers based on the augmented prompt and
                     retrieved content.
                   </p>
@@ -122,10 +122,10 @@ export default function AboutPage() {
           whileHover={{ scale: 1.015 }}
           className="block-container"
         >
-          <Card>
+          <Card className="bg-transparent">
             <CardHeader>
               <CardTitle className="text-2xl">Technology Stack</CardTitle>
-              <CardDescription className="text-base">
+              <CardDescription className="text-base text-black dark:text-white">
                 Built with modern technologies for optimal performance and scalability
               </CardDescription>
             </CardHeader>
@@ -133,7 +133,7 @@ export default function AboutPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <div className="p-6 border rounded-xl space-y-4">
                   <h4 className="text-lg font-semibold">Frontend</h4>
-                  <div className="space-y-2 text-sm text-muted-foreground">
+                  <div className="space-y-2 text-sm text-black dark:text-white">
                     <div className="flex items-center gap-2">
                       <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
                       <span>Next.js 14 (App Router)</span>
@@ -155,7 +155,7 @@ export default function AboutPage() {
 
                 <div className="p-6 border rounded-xl space-y-4">
                   <h4 className="text-lg font-semibold">AI & Machine Learning</h4>
-                  <div className="space-y-2 text-sm text-muted-foreground">
+                  <div className="space-y-2 text-sm text-black dark:text-white">
                     <div className="flex items-center gap-2">
                       <div className="w-2 h-2 bg-green-500 rounded-full"></div>
                       <span>AI/LLM (OpenAI GPT-3.5 Turbo)</span>
@@ -177,7 +177,7 @@ export default function AboutPage() {
 
                 <div className="p-6 border rounded-xl space-y-4">
                   <h4 className="text-lg font-semibold">Backend & Infrastructure</h4>
-                  <div className="space-y-2 text-sm text-muted-foreground">
+                  <div className="space-y-2 text-sm text-black dark:text-white">
                     <div className="flex items-center gap-2">
                       <div className="w-2 h-2 bg-green-600 rounded-full"></div>
                       <span>Python via Uvicorn</span>
@@ -207,7 +207,7 @@ export default function AboutPage() {
           whileHover={{ scale: 1.015 }}
           className="block-container"
         >
-          <Card>
+          <Card className="bg-transparent">
             <CardHeader>
               <CardTitle className="text-2xl">Key Features</CardTitle>
             </CardHeader>
@@ -218,7 +218,7 @@ export default function AboutPage() {
                     <Shield className="h-6 w-6 text-green-600 mt-1 flex-shrink-0" />
                     <div>
                       <h4 className="text-lg font-medium">Accurate Responses</h4>
-                      <p className="text-muted-foreground text-sm lg:text-base">
+                      <p className="text-black dark:text-white text-sm lg:text-base">
                         RAG ensures answers are grounded in your actual document content, reducing hallucinations and
                         improving accuracy.
                       </p>
@@ -229,7 +229,7 @@ export default function AboutPage() {
                     <Globe className="h-6 w-6 text-blue-600 mt-1 flex-shrink-0" />
                     <div>
                       <h4 className="text-lg font-medium">Multi-format Support</h4>
-                      <p className="text-muted-foreground text-sm lg:text-base">
+                      <p className="text-black dark:text-white text-sm lg:text-base">
                         Works with PDF, Word documents, text files, and more with intelligent content extraction.
                       </p>
                     </div>
@@ -241,7 +241,7 @@ export default function AboutPage() {
                     <Zap className="h-6 w-6 text-yellow-600 mt-1 flex-shrink-0" />
                     <div>
                       <h4 className="text-lg font-medium">Fast Processing</h4>
-                      <p className="text-muted-foreground text-sm lg:text-base">
+                      <p className="text-black dark:text-white text-sm lg:text-base">
                         Optimized vector search and caching for quick document retrieval and response generation.
                       </p>
                     </div>
@@ -251,7 +251,7 @@ export default function AboutPage() {
                     <Brain className="h-6 w-6 text-purple-600 mt-1 flex-shrink-0" />
                     <div>
                       <h4 className="text-lg font-medium">Natural Language</h4>
-                      <p className="text-muted-foreground text-sm lg:text-base">
+                      <p className="text-black dark:text-white text-sm lg:text-base">
                         Ask questions in plain English with context understanding and conversational follow-ups.
                       </p>
                     </div>
@@ -267,10 +267,10 @@ export default function AboutPage() {
           whileHover={{ scale: 1.015 }}
           className="block-container"
         >
-          <Card>
+          <Card className="bg-transparent">
             <CardHeader>
               <CardTitle className="text-2xl">Meet the Developer</CardTitle>
-              <CardDescription className="text-base">The team behind Document QA Generator</CardDescription>
+              <CardDescription className="text-base text-black dark:text-white">The creator behind this Document QA Generator</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
@@ -281,27 +281,27 @@ export default function AboutPage() {
                 <div className="flex-1 text-center md:text-left space-y-4">
                   <div>
                     <h3 className="text-2xl font-semibold">Manikanta Darapureddy</h3>
-                    <p className="text-lg text-muted-foreground">Full Stack AI Engineer</p>
+                    <p className="text-lg text-black dark:text-white">Full Stack AI Engineer</p>
                   </div>
-                  <p className="text-muted-foreground leading-relaxed text-sm lg:text-base">
+                  <p className="text-black dark:text-white leading-relaxed text-sm lg:text-base">
                     Passionate about building AI-powered applications that solve real-world problems. With expertise in
                     machine learning, web development, and user experience design, I focus on creating intuitive tools
                     that make complex AI technology accessible to everyone.
                   </p>
                   <div className="flex justify-center md:justify-start gap-4">
-                    <Link href="https://github.com/chinni-d" target="_blank" className="text-muted-foreground hover:text-foreground transition-colors">
+                    <Link href="https://github.com/chinni-d" target="_blank" className="text-black dark:text-white hover:text-foreground transition-colors">
                       <Github className="h-6 w-6" />
                       <span className="sr-only">GitHub</span>
                     </Link>
-                    <Link href="https://www.linkedin.com/in/manikanta-darapureddy-6a1125314/" target="_blank" className="text-muted-foreground hover:text-foreground transition-colors">
+                    <Link href="https://www.linkedin.com/in/manikanta-darapureddy-6a1125314/" target="_blank" className="text-black dark:text-white hover:text-foreground transition-colors">
                       <Linkedin className="h-6 w-6" />
                       <span className="sr-only">LinkedIn</span>
                     </Link>
-                    <Link href="mailto:darapureddymanikanta8@gmail.com" target="_blank" className="text-muted-foreground hover:text-foreground transition-colors">
+                    <Link href="mailto:darapureddymanikanta8@gmail.com" target="_blank" className="text-black dark:text-white hover:text-foreground transition-colors">
                       <Mail className="h-6 w-6" />
                       <span className="sr-only">Email</span>
                     </Link>
-                    <Link href="https://www.dmanikanta.site/" target="_blank" className="text-muted-foreground hover:text-foreground transition-colors">
+                    <Link href="https://www.dmanikanta.site/" target="_blank" className="text-black dark:text-white hover:text-foreground transition-colors">
                       <Globe2 className="h-6 w-6" />
                       <span className="sr-only">Website</span>
                     </Link>
@@ -317,7 +317,7 @@ export default function AboutPage() {
           whileHover={{ scale: 1.015 }}
           className="block-container"
         >
-          <Card>
+          <Card className="bg-transparent">
             <CardHeader>
               <CardTitle className="text-2xl">Use Cases & Applications</CardTitle>
             </CardHeader>
@@ -326,7 +326,7 @@ export default function AboutPage() {
                 <div className="space-y-6">
                   <div>
                     <h4 className="text-lg font-semibold mb-3">Research & Academia</h4>
-                    <ul className="space-y-2 text-muted-foreground">
+                    <ul className="space-y-2 text-black dark:text-white">
                       <li className="flex items-start gap-2">
                         <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0"></div>
                         <span>Analyze research papers and publications</span>
@@ -344,7 +344,7 @@ export default function AboutPage() {
 
                   <div>
                     <h4 className="text-lg font-semibold mb-3">Business & Legal</h4>
-                    <ul className="space-y-2 text-muted-foreground">
+                    <ul className="space-y-2 text-black dark:text-white">
                       <li className="flex items-start gap-2">
                         <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0"></div>
                         <span>Review contracts and agreements</span>
@@ -364,7 +364,7 @@ export default function AboutPage() {
                 <div className="space-y-6">
                   <div>
                     <h4 className="text-lg font-semibold mb-3">Education & Learning</h4>
-                    <ul className="space-y-2 text-muted-foreground">
+                    <ul className="space-y-2 text-black dark:text-white">
                       <li className="flex items-start gap-2">
                         <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0"></div>
                         <span>Study textbooks and educational materials</span>
@@ -382,7 +382,7 @@ export default function AboutPage() {
 
                   <div>
                     <h4 className="text-lg font-semibold mb-3">Personal & Professional</h4>
-                    <ul className="space-y-2 text-muted-foreground">
+                    <ul className="space-y-2 text-black dark:text-white">
                       <li className="flex items-start gap-2">
                         <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0"></div>
                         <span>Organize and search personal documents</span>

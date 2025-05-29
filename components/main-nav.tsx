@@ -44,7 +44,19 @@ export function MainNav() {
               <span className="sr-only">Toggle menu</span>
             </Button>
           </SheetTrigger>
-          <SheetContent side="left" className="w-[250px] pr-0">
+          <SheetContent side="left" className="w-[250px] pr-0"
+            onTouchStart={(e) => {
+              e.currentTarget.dataset.dragStartX = String(e.touches[0].clientX);
+            }}
+            onTouchMove={(e) => {
+              const startX = Number(e.currentTarget.dataset.dragStartX);
+              const currentX = e.touches[0].clientX;
+              if (startX - currentX > 60) {
+                setOpen(false);
+                e.currentTarget.dataset.dragStartX = undefined;
+              }
+            }}
+          >
             <SheetTitle className="sr-only">Main Navigation</SheetTitle>
             <div className="flex flex-col space-y-6 py-4">
               <div className="flex items-center justify-between px-4">
