@@ -1,26 +1,42 @@
-"use client"
+"use client";
 
-import type React from "react"
-import { useState, useRef, useEffect } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { Separator } from "@/components/ui/separator"
-import { Badge } from "@/components/ui/badge"
-import { Textarea } from "@/components/ui/textarea"
-import { Send, Upload, FileText, User, Bot, Paperclip, MoreVertical, Copy, ThumbsUp, ThumbsDown } from "lucide-react"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import type React from "react";
+import { useState, useRef, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Separator } from "@/components/ui/separator";
+import { Badge } from "@/components/ui/badge";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Send,
+  Upload,
+  FileText,
+  User,
+  Bot,
+  Paperclip,
+  MoreVertical,
+  Copy,
+  ThumbsUp,
+  ThumbsDown,
+} from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 interface Message {
-  id: string
-  type: "user" | "assistant"
-  content: string
-  timestamp: Date
-  timeString: string
+  id: string;
+  type: "user" | "assistant";
+  content: string;
+  timestamp: Date;
+  timeString: string;
 }
 
 export default function ChatPage() {
-  const fileInputRef = useRef<HTMLInputElement>(null)
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
@@ -30,7 +46,7 @@ export default function ChatPage() {
       timestamp: new Date(),
       timeString: "",
     },
-  ])
+  ]);
 
   // Set the initial assistant message's timeString on the client to avoid hydration errors
   useEffect(() => {
@@ -48,96 +64,96 @@ export default function ChatPage() {
     // Only run on mount
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const [inputValue, setInputValue] = useState("")
-  const [uploadedFiles, setUploadedFiles] = useState<File[]>([])
-  const [selectedFileIndex, setSelectedFileIndex] = useState<number | null>(null)
-  const [isTyping, setIsTyping] = useState(false)
-  const messagesEndRef = useRef<HTMLDivElement>(null)
-  const textareaRef = useRef<HTMLTextAreaElement>(null)
+  const [inputValue, setInputValue] = useState("");
+  const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
+  const [selectedFileIndex, setSelectedFileIndex] = useState<number | null>(
+    null
+  );
+  const [isTyping, setIsTyping] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const handleSendMessage = async () => {
-  if (!inputValue.trim()) return;
+    if (!inputValue.trim()) return;
 
-
-  let file: File | undefined;
-  if (uploadedFiles.length > 0) {
-    if (selectedFileIndex !== null && uploadedFiles[selectedFileIndex]) {
-      file = uploadedFiles[selectedFileIndex];
-    } else {
-      file = uploadedFiles[0];
-    }
-  }
-
-
-  // Add file context to the user message for clarity
-  const fileName = file?.name;
-  const now = new Date();
-  const userMessage: Message = {
-    id: Date.now().toString(),
-    type: "user",
-    content: `${inputValue}${fileName ? ` [File: ${fileName}]` : ''}`,
-    timestamp: now,
-    timeString: now.toLocaleTimeString(),
-  };
-
-  setMessages((prev) => [...prev, userMessage]);
-  setInputValue("");
-  setIsTyping(true);
-
-  try {
-    const formData = new FormData();
-    if (file) {
-      formData.append("file", file);
-    }
-    formData.append("question", inputValue);
-
-    const response = await fetch("https://fastapi-6nfy.onrender.com/ask", {
-      method: "POST",
-      body: formData,
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+    let file: File | undefined;
+    if (uploadedFiles.length > 0) {
+      if (selectedFileIndex !== null && uploadedFiles[selectedFileIndex]) {
+        file = uploadedFiles[selectedFileIndex];
+      } else {
+        file = uploadedFiles[0];
+      }
     }
 
-    const data = await response.json();
-    console.log("API Response:", data); // ✅ DEBUG LOG
-
-    const now2 = new Date();
-    const assistantMessage: Message = {
-      id: (Date.now() + 1).toString(),
-      type: "assistant",
-      content: data.answer || "❌ Sorry, no answer was returned from the backend.",
-      timestamp: now2,
-      timeString: now2.toLocaleTimeString(),
+    // Add file context to the user message for clarity
+    const fileName = file?.name;
+    const now = new Date();
+    const userMessage: Message = {
+      id: Date.now().toString(),
+      type: "user",
+      content: `${inputValue}${fileName ? ` [File: ${fileName}]` : ""}`,
+      timestamp: now,
+      timeString: now.toLocaleTimeString(),
     };
 
-    setMessages((prev) => [...prev, assistantMessage]);
-  } catch (err) {
-    console.error("Error while calling backend:", err);
-    const now3 = new Date();
-    setMessages((prev) => [
-      ...prev,
-      {
-        id: Date.now().toString(),
-        type: "assistant",
-        content: "❌ Failed to connect to the backend or process the file.",
-        timestamp: now3,
-        timeString: now3.toLocaleTimeString(),
-      },
-    ]);
-  } finally {
-    setIsTyping(false);
-  }
-};
+    setMessages((prev) => [...prev, userMessage]);
+    setInputValue("");
+    setIsTyping(true);
 
+    try {
+      const formData = new FormData();
+      if (file) {
+        formData.append("file", file);
+      }
+      formData.append("question", inputValue);
+
+      const response = await fetch("https://docapi.dmanikanta.site/ask", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log("API Response:", data); // ✅ DEBUG LOG
+
+      const now2 = new Date();
+      const assistantMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        type: "assistant",
+        content:
+          data.answer || "❌ Sorry, no answer was returned from the backend.",
+        timestamp: now2,
+        timeString: now2.toLocaleTimeString(),
+      };
+
+      setMessages((prev) => [...prev, assistantMessage]);
+    } catch (err) {
+      console.error("Error while calling backend:", err);
+      const now3 = new Date();
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: Date.now().toString(),
+          type: "assistant",
+          content: "❌ Failed to connect to the backend or process the file.",
+          timestamp: now3,
+          timeString: now3.toLocaleTimeString(),
+        },
+      ]);
+    } finally {
+      setIsTyping(false);
+    }
+  };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault()
-      handleSendMessage()
+      e.preventDefault();
+      handleSendMessage();
     }
-  }
+  };
 
   const sampleQuestions = [
     "What are the main topics covered in the document?",
@@ -145,10 +161,10 @@ export default function ChatPage() {
     "What methodology was used in the research?",
     "Extract the financial highlights from Q3 report",
     "What are the action items from the meeting notes?",
-  ]
+  ];
 
   useEffect(() => {
-    const container = document.querySelector('.overflow-y-auto');
+    const container = document.querySelector(".overflow-y-auto");
     if (container) {
       container.scrollTop = container.scrollHeight;
     }
@@ -174,11 +190,11 @@ export default function ChatPage() {
                 accept=".pdf,.doc,.docx,.txt"
                 style={{ display: "none" }}
                 ref={fileInputRef}
-                onChange={e => {
+                onChange={(e) => {
                   const files = e.target.files;
                   if (!files) return;
                   const newFiles = Array.from(files);
-                  setUploadedFiles(prev => [...prev, ...newFiles]);
+                  setUploadedFiles((prev) => [...prev, ...newFiles]);
                 }}
               />
               <Button
@@ -198,13 +214,29 @@ export default function ChatPage() {
                 {uploadedFiles.map((file, index) => (
                   <div
                     key={index}
-                    className={`group flex items-center gap-2 p-2 rounded-lg cursor-pointer transition-colors ${selectedFileIndex === index ? 'bg-primary/20 border border-primary' : 'bg-muted/50 hover:bg-muted'}`}
+                    className={`group flex items-center gap-2 p-2 rounded-lg cursor-pointer transition-colors ${
+                      selectedFileIndex === index
+                        ? "bg-primary/20 border border-primary"
+                        : "bg-muted/50 hover:bg-muted"
+                    }`}
                   >
-                    <FileText className="h-4 w-4 text-muted-foreground flex-shrink-0" onClick={() => setSelectedFileIndex(index)} />
-                    <div className="flex-1 min-w-0" onClick={() => setSelectedFileIndex(index)}>
+                    <FileText
+                      className="h-4 w-4 text-muted-foreground flex-shrink-0"
+                      onClick={() => setSelectedFileIndex(index)}
+                    />
+                    <div
+                      className="flex-1 min-w-0"
+                      onClick={() => setSelectedFileIndex(index)}
+                    >
                       <p className="text-sm truncate">{file.name}</p>
                     </div>
-                    <Badge variant={selectedFileIndex === index ? "default" : "secondary"} className="text-xs" onClick={() => setSelectedFileIndex(index)}>
+                    <Badge
+                      variant={
+                        selectedFileIndex === index ? "default" : "secondary"
+                      }
+                      className="text-xs"
+                      onClick={() => setSelectedFileIndex(index)}
+                    >
                       {selectedFileIndex === index ? "Selected" : "Select"}
                     </Badge>
                     <Button
@@ -213,19 +245,43 @@ export default function ChatPage() {
                       variant="ghost"
                       className="h-6 w-6 ml-1"
                       aria-label="Remove file"
-                      onClick={e => {
+                      onClick={(e) => {
                         e.stopPropagation();
-                        setUploadedFiles(prev => prev.filter((_, i) => i !== index));
-                        setSelectedFileIndex(prev => {
+                        setUploadedFiles((prev) =>
+                          prev.filter((_, i) => i !== index)
+                        );
+                        setSelectedFileIndex((prev) => {
                           if (prev === index) return null;
                           if (prev !== null && prev > index) return prev - 1;
                           return prev;
                         });
                       }}
                     >
-                      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <line x1="4" y1="4" x2="14" y2="14" stroke="#ef4444" strokeWidth="2.5" strokeLinecap="round" />
-                        <line x1="14" y1="4" x2="4" y2="14" stroke="#ef4444" strokeWidth="2.5" strokeLinecap="round" />
+                      <svg
+                        width="18"
+                        height="18"
+                        viewBox="0 0 18 18"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <line
+                          x1="4"
+                          y1="4"
+                          x2="14"
+                          y2="14"
+                          stroke="#ef4444"
+                          strokeWidth="2.5"
+                          strokeLinecap="round"
+                        />
+                        <line
+                          x1="14"
+                          y1="4"
+                          x2="4"
+                          y2="14"
+                          stroke="#ef4444"
+                          strokeWidth="2.5"
+                          strokeLinecap="round"
+                        />
                       </svg>
                     </Button>
                   </div>
@@ -237,7 +293,9 @@ export default function ChatPage() {
           {/* Sample Questions */}
           <Card className="hidden lg:block bg-transparent">
             <CardHeader className="pb-3">
-              <CardTitle className="text-sm font-bold text-primary">Sample Questions</CardTitle>
+              <CardTitle className="text-sm font-bold text-primary">
+                Sample Questions
+              </CardTitle>
             </CardHeader>
             <CardContent className="space-y-2">
               {sampleQuestions.map((question, index) => (
@@ -261,9 +319,12 @@ export default function ChatPage() {
             <CardHeader className="border-b">
               <div className="flex items-center justify-between">
                 <div>
-                  <CardTitle className="text-xl">Chat with Your Documents</CardTitle>
+                  <CardTitle className="text-xl">
+                    Chat with Your Documents
+                  </CardTitle>
                   <p className="text-sm text-black dark:text-white mt-1">
-                    Ask questions and get AI-powered insights from your uploaded documents
+                    Ask questions and get AI-powered insights from your uploaded
+                    documents
                   </p>
                 </div>
                 <DropdownMenu>
@@ -286,22 +347,76 @@ export default function ChatPage() {
                 <div className="space-y-6 break-words">
                   {messages.map((message) => (
                     <div key={message.id} className="group">
-                      <div className={`flex gap-4 ${message.type === "user" ? "justify-end" : "justify-start"}`}>
-                        <div className={`flex gap-3 max-w-[85%] ${message.type === "user" ? "flex-row-reverse" : "flex-row"}`}>
-                          <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${message.type === "user" ? "bg-primary text-primary-foreground" : "bg-muted border"}`}>
-                            {message.type === "user" ? <User className="h-4 w-4" /> : <Bot className="h-4 w-4" />}
+                      <div
+                        className={`flex gap-4 ${
+                          message.type === "user"
+                            ? "justify-end"
+                            : "justify-start"
+                        }`}
+                      >
+                        <div
+                          className={`flex gap-3 max-w-[85%] ${
+                            message.type === "user"
+                              ? "flex-row-reverse"
+                              : "flex-row"
+                          }`}
+                        >
+                          <div
+                            className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
+                              message.type === "user"
+                                ? "bg-primary text-primary-foreground"
+                                : "bg-muted border"
+                            }`}
+                          >
+                            {message.type === "user" ? (
+                              <User className="h-4 w-4" />
+                            ) : (
+                              <Bot className="h-4 w-4" />
+                            )}
                           </div>
                           <div className="flex-1 space-y-2">
-                            <div className={`rounded-2xl px-4 py-3 ${message.type === "user" ? "bg-primary text-primary-foreground ml-4" : "bg-muted mr-4"}`}>
-                              <p className="text-sm leading-relaxed whitespace-pre-wrap break-words">{message.content}</p>
+                            <div
+                              className={`rounded-2xl px-4 py-3 ${
+                                message.type === "user"
+                                  ? "bg-primary text-primary-foreground ml-4"
+                                  : "bg-muted mr-4"
+                              }`}
+                            >
+                              <p className="text-sm leading-relaxed whitespace-pre-wrap break-words">
+                                {message.content}
+                              </p>
                             </div>
-                            <div className={`flex items-center gap-2 text-xs text-muted-foreground ${message.type === "user" ? "justify-end mr-4" : "justify-start ml-4"}`}>
+                            <div
+                              className={`flex items-center gap-2 text-xs text-muted-foreground ${
+                                message.type === "user"
+                                  ? "justify-end mr-4"
+                                  : "justify-start ml-4"
+                              }`}
+                            >
                               <span>{message.timeString}</span>
                               {message.type === "assistant" && (
                                 <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                                  <Button variant="ghost" size="icon" className="h-6 w-6"><Copy className="h-3 w-3" /></Button>
-                                  <Button variant="ghost" size="icon" className="h-6 w-6"><ThumbsUp className="h-3 w-3" /></Button>
-                                  <Button variant="ghost" size="icon" className="h-6 w-6"><ThumbsDown className="h-3 w-3" /></Button>
+                                  <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    className="h-6 w-6"
+                                  >
+                                    <Copy className="h-3 w-3" />
+                                  </Button>
+                                  <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    className="h-6 w-6"
+                                  >
+                                    <ThumbsUp className="h-3 w-3" />
+                                  </Button>
+                                  <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    className="h-6 w-6"
+                                  >
+                                    <ThumbsDown className="h-3 w-3" />
+                                  </Button>
                                 </div>
                               )}
                             </div>
@@ -319,8 +434,14 @@ export default function ChatPage() {
                       <div className="bg-muted rounded-2xl px-4 py-3">
                         <div className="flex space-x-1">
                           <div className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce"></div>
-                          <div className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: "0.1s" }}></div>
-                          <div className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce" style={{ animationDelay: "0.2s" }}></div>
+                          <div
+                            className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce"
+                            style={{ animationDelay: "0.1s" }}
+                          ></div>
+                          <div
+                            className="w-2 h-2 bg-muted-foreground rounded-full animate-bounce"
+                            style={{ animationDelay: "0.2s" }}
+                          ></div>
                         </div>
                       </div>
                     </div>
@@ -331,7 +452,9 @@ export default function ChatPage() {
 
               {/* Sample Questions for Mobile */}
               <div className="lg:hidden p-4 border-t bg-muted/30">
-                <p className="text-xs font-medium text-muted-foreground mb-2">Quick questions:</p>
+                <p className="text-xs font-medium text-muted-foreground mb-2">
+                  Quick questions:
+                </p>
                 <div className="flex gap-2 overflow-x-auto pb-2">
                   {sampleQuestions.slice(0, 3).map((question, index) => (
                     <Button
@@ -358,10 +481,14 @@ export default function ChatPage() {
                       onChange={(e) => setInputValue(e.target.value)}
                       onKeyPress={handleKeyPress}
                       className="min-h-[44px] max-h-32 resize-none pr-12 text-sm lg:text-base"
-                      style={{ fontSize: '16px', caretColor: 'auto' }} // Ensure consistent font size and caret color
+                      style={{ fontSize: "16px", caretColor: "auto" }} // Ensure consistent font size and caret color
                       rows={1}
                     />
-                    <Button variant="ghost" size="icon" className="absolute right-1 top-1 h-8 w-8">
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="absolute right-1 top-1 h-8 w-8"
+                    >
                       <Paperclip className="h-4 w-4" />
                     </Button>
                   </div>
@@ -374,12 +501,14 @@ export default function ChatPage() {
                     <Send className="h-4 w-4" />
                   </Button>
                 </div>
-                <p className="text-xs text-muted-foreground mt-2 hidden lg:block">Press Enter to send, Shift+Enter for new line</p>
+                <p className="text-xs text-muted-foreground mt-2 hidden lg:block">
+                  Press Enter to send, Shift+Enter for new line
+                </p>
               </div>
             </CardContent>
           </Card>
         </div>
       </div>
     </div>
-  )
+  );
 }
