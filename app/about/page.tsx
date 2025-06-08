@@ -13,7 +13,7 @@ export default function AboutPage() {
       <div className="space-y-12">
         {/* Header */}
         <div className="text-center space-y-4">
-          <h1 className="text-4xl font-bold tracking-tight"><SparklesText text="About Document QA Generator" /></h1>
+          <h1 className="text-4xl font-bold tracking-tight"><SparklesText text="About Document Analyzer" /></h1>
           <p className="text-base text-black dark:text-white max-w-3xl mx-auto">
             Learn about our RAG-powered document analysis system and the technology behind intelligent document
             processing
@@ -34,7 +34,7 @@ export default function AboutPage() {
             </CardHeader>
             <CardContent className="space-y-6">
               <p className="text-black dark:text-white leading-relaxed text-sm lg:text-base"> 
-                The Document QA Generator is an advanced AI-powered application that enables users to upload documents and
+                The Document Analyzer is an advanced AI-powered application that enables users to upload documents and
                 ask natural language questions about their content. Built using cutting-edge Retrieval-Augmented
                 Generation (RAG) architecture, it combines the power of information retrieval with large language models
                 to provide accurate, contextual answers.
@@ -237,24 +237,18 @@ export default function AboutPage() {
                 </div>
 
                 <div className="space-y-6">
-                  <div className="flex items-start gap-4">
-                    <Zap className="h-6 w-6 text-yellow-600 mt-1 flex-shrink-0" />
-                    <div>
-                      <h4 className="text-lg font-medium">Fast Processing</h4>
-                      <p className="text-black dark:text-white text-sm lg:text-base">
-                        Optimized vector search and caching for quick document retrieval and response generation.
-                      </p>
-                    </div>
+                  <div>
+                    <h4 className="text-lg font-medium">Fast Processing</h4>
+                    <p className="text-black dark:text-white text-sm lg:text-base">
+                      Optimized vector search and caching for quick document retrieval and response generation.
+                    </p>
                   </div>
 
-                  <div className="flex items-start gap-4">
-                    <Brain className="h-6 w-6 text-purple-600 mt-1 flex-shrink-0" />
-                    <div>
-                      <h4 className="text-lg font-medium">Natural Language</h4>
-                      <p className="text-black dark:text-white text-sm lg:text-base">
-                        Ask questions in plain English with context understanding and conversational follow-ups.
-                      </p>
-                    </div>
+                  <div>
+                    <h4 className="text-lg font-medium">Natural Language</h4>
+                    <p className="text-black dark:text-white text-sm lg:text-base">
+                      Ask questions in plain English with context understanding and conversational follow-ups.
+                    </p>
                   </div>
                 </div>
               </div>
@@ -270,7 +264,7 @@ export default function AboutPage() {
           <Card className="bg-transparent">
             <CardHeader>
               <CardTitle className="text-2xl">Meet the Developer</CardTitle>
-              <CardDescription className="text-base text-black dark:text-white">The creator behind this Document QA Generator</CardDescription>
+              <CardDescription className="text-base text-black dark:text-white">The creator behind this Document Analyzer</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">

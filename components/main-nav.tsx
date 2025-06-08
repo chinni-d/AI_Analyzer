@@ -94,7 +94,7 @@ export function MainNav() {
         {/* Logo */}
         <div className="flex items-center flex-1">
           <Link href="/" className="flex items-center gap-2">
-            <span className="font-semibold hidden sm:inline-block">Document QA Generator</span>
+            <span className="font-semibold hidden sm:inline-block">Document Analyzer</span>
             <span className="font-semibold sm:hidden">Doc QA</span>
           </Link>
         </div>

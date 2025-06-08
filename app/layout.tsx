@@ -7,7 +7,7 @@ import { LayoutClient } from "@/components/layout-client"; // Import the new cli
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Document QA Generator",
+  title: "Document Analyzer",
   description: "AI-powered document question answering system using RAG architecture",
   generator: "v0.dev",
 };
