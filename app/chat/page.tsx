@@ -77,21 +77,18 @@ export default function ChatPage() {
     if (!inputValue.trim()) return;
 
     let file: File | undefined;
-    if (uploadedFiles.length > 0) {
-      if (selectedFileIndex !== null && uploadedFiles[selectedFileIndex]) {
-        file = uploadedFiles[selectedFileIndex];
-      } else {
-        file = uploadedFiles[0];
-      }
+    // Only set the file if a file is explicitly selected
+    if (selectedFileIndex !== null && uploadedFiles[selectedFileIndex]) {
+      file = uploadedFiles[selectedFileIndex];
     }
 
-    // Add file context to the user message for clarity
+    // Add file context to the user message for clarity only if a file is being used
     const fileName = file?.name;
     const now = new Date();
     const userMessage: Message = {
       id: Date.now().toString(),
       type: "user",
-      content: `${inputValue}${fileName ? ` [File: ${fileName}]` : ""}`,
+      content: `${inputValue}${fileName ? ` [File: ${fileName}]` : ""}`, // Conditional file name
       timestamp: now,
       timeString: now.toLocaleTimeString(),
     };
