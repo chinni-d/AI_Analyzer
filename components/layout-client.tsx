@@ -6,6 +6,7 @@ import { Component } from "@/components/etheral-shadow";
 import { MainNav } from "@/components/main-nav";
 import { Footer } from "@/components/footer";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster } from "@/components/ui/sonner"; // Import Toaster
 import { cn } from "@/lib/utils";
 
 interface LayoutClientProps {
@@ -58,6 +59,7 @@ export function LayoutClient({ children }: LayoutClientProps) {
         <main className="flex-1 pt-[64px] px-4">{children}</main>
         <Footer />
       </div>
+      <Toaster /> {/* Add Toaster here to enable toast notifications */}
     </ThemeProvider>
   );
 }

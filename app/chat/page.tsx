@@ -19,6 +19,7 @@ import {
   Copy,
   ThumbsUp,
   ThumbsDown,
+  // Check, // Removed unused Check icon
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -26,6 +27,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { toast } from "sonner"; // Import toast
 
 interface Message {
   id: string;
@@ -426,6 +428,50 @@ export default function ChatPage() {
                                     variant="ghost"
                                     size="icon"
                                     className="h-6 w-6"
+                                    onClick={async () => {
+                                      const textToCopy = message.content;
+                                      if (navigator.clipboard && navigator.clipboard.writeText) {
+                                        try {
+                                          await navigator.clipboard.writeText(textToCopy);
+                                          toast.success("Message copied to clipboard!");
+                                        } catch (err) {
+                                          console.error("Failed to copy using Clipboard API: ", err);
+                                          let errorMessage = "Could not copy message.";
+                                          if (err instanceof Error && err.name === 'NotAllowedError') {
+                                            errorMessage = "Clipboard permission denied.";
+                                          }
+                                          toast.error(errorMessage);
+                                        }
+                                      } else {
+                                        // Fallback for browsers/contexts where Clipboard API is not available (e.g., HTTP)
+                                        try {
+                                          const textArea = document.createElement("textarea");
+                                          textArea.value = textToCopy;
+                                          textArea.style.position = "fixed"; // Prevent scrolling to bottom
+                                          textArea.style.opacity = "0"; // Hide the textarea
+                                          document.body.appendChild(textArea);
+                                          textArea.focus();
+                                          textArea.select();
+                                          const successful = document.execCommand("copy");
+                                          document.body.removeChild(textArea);
+                                          if (successful) {
+                                            toast.success("Message copied (fallback)!");
+                                          } else {
+                                            toast.error("Copying not supported or failed.");
+                                            if (window.isSecureContext === false) {
+                                              console.warn("Clipboard API requires HTTPS. Fallback also failed.");
+                                              toast.info("For clipboard access, please use HTTPS.");
+                                            } else {
+                                              console.warn("Clipboard API not available and fallback failed.");
+                                            }
+                                          }
+                                        } catch (err) {
+                                          console.error("Fallback copy method failed: ", err);
+                                          toast.error("Copying failed.");
+                                        }
+                                      }
+                                    }}
+                                    aria-label="Copy message"
                                   >
                                     <Copy className="h-3 w-3" />
                                   </Button>
