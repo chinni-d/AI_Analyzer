@@ -2,27 +2,30 @@
 
 import * as React from "react"
 import Link from "next/link"
-import Image from "next/image"; // Import the Next.js Image component
+import Image from "next/image";
 import { usePathname } from "next/navigation"
-import { FileText, Menu, X } from "lucide-react"
+import { Menu, X, HomeIcon, MessageSquare, Info } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet"
-import { VisuallyHidden } from "@radix-ui/react-visually-hidden"
 import { ThemeToggle } from "@/components/theme-toggle"
+import { Separator } from "@/components/ui/separator" // Import Separator
 
 const navItems = [
   {
     title: "Home",
     href: "/",
+    icon: HomeIcon,
   },
   {
     title: "Chat",
     href: "/chat",
+    icon: MessageSquare,
   },
   {
     title: "About",
     href: "/about",
+    icon: Info,
   },
 ]
 
@@ -45,7 +48,7 @@ export function MainNav() {
               <span className="sr-only">Toggle menu</span>
             </Button>
           </SheetTrigger>
-          <SheetContent side="left" className="w-[250px] pr-0"
+          <SheetContent side="left" className="w-3/5 p-4 md:w-[250px]"
             onTouchStart={(e) => {
               e.currentTarget.dataset.dragStartX = String(e.touches[0].clientX);
             }}
@@ -59,33 +62,45 @@ export function MainNav() {
             }}
           >
             <SheetTitle className="sr-only">Main Navigation</SheetTitle>
-            <div className="flex flex-col space-y-6 py-4">
-              <div className="flex items-center justify-between px-4">
+            <div className="flex flex-col h-full"> {/* Changed space-y-4 to flex-col h-full for manual spacing control */}
+              <div className="flex items-center justify-between"> {/* Removed mb-2, separator will handle spacing */}
                 <Link href="/" className="flex items-center gap-2" onClick={handleNavItemClick}>
-                  <Image src="/logo.png" alt="Document Analyzer Logo" width={28} height={28} className="h-7 w-7 invert dark:invert-0" /> 
-                  <span className="font-semibold">Doc Analyzer</span>
+                  <Image src="/logo.png" alt="Document Analyzer Logo" width={24} height={24} className="h-6 w-6 invert dark:invert-0" />
+                  <span className="font-semibold text-md">Doc Analyzer</span>
                 </Link>
-                <Button variant="ghost" size="icon" onClick={() => setOpen(false)}>
-                  <span className="sr-only">Close</span>
-                </Button>
               </div>
-              <div className="px-2">
-                <nav className="flex flex-col space-y-2">
-                  {navItems.map((item) => (
+
+              <Separator className="my-3" />
+
+              <nav className="flex flex-col space-y-1.5 flex-grow"> {/* Kept space-y at 1.5 */}
+                {navItems.map((item) => {
+                  const Icon = item.icon;
+                  return (
                     <Link
                       key={item.href}
                       href={item.href}
                       onClick={handleNavItemClick}
                       className={cn(
-                        "flex items-center rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground",
-                        pathname === item.href ? "bg-accent text-accent-foreground" : "transparent",
+                        "group flex items-center gap-2.5 rounded-md px-3 py-2.5 text-sm font-medium transition-all duration-150 ease-in-out hover:bg-accent hover:text-accent-foreground focus-visible:bg-accent focus-visible:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background", // Adjusted padding, gap, text size back to sm
+                        pathname === item.href 
+                          ? "bg-accent text-primary font-semibold shadow-sm"
+                          : "text-muted-foreground hover:text-foreground",
                       )}
                     >
+                      <Icon className={cn(
+                        "h-[18px] w-[18px] transition-colors duration-150 ease-in-out", // Slightly increased icon size to 18px
+                        pathname === item.href
+                          ? "text-primary"
+                          : "text-muted-foreground group-hover:text-accent-foreground"
+                      )} />
                       {item.title}
                     </Link>
-                  ))}
-                </nav>
-              </div>
+                  );
+                })}
+              </nav>
+              {/* Optionally, add a ThemeToggle or other footer items here if desired for mobile sidebar */}
+              {/* For example, a fixed ThemeToggle at the bottom: */}
+              {/* <div className="mt-auto"> <ThemeToggle /> </div> */}
             </div>
           </SheetContent>
         </Sheet>
