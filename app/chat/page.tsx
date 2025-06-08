@@ -73,6 +73,36 @@ export default function ChatPage() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
+  const handleClearChat = () => {
+    setMessages([
+      {
+        id: "1",
+        type: "assistant",
+        content:
+          "Hello! I'm your AI assistant ready to help you analyze your documents. Upload a document and ask me any questions about its content. I can help you understand, summarize, and extract insights from your files.",
+        timestamp: new Date(),
+        timeString: new Date().toLocaleTimeString(), // Ensure timeString is set
+      },
+    ]);
+  };
+
+  const handleExportChat = () => {
+    const chatContent = messages
+      .map(
+        (msg) =>
+          `[${msg.timeString}] ${msg.type === "user" ? "User" : "Assistant"}: ${msg.content}`
+      )
+      .join("\n");
+    const blob = new Blob([chatContent], { type: "text/plain;charset=utf-8" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = `chat-export-${new Date().toISOString().slice(0, 10)}.txt`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(link.href);
+  };
+
   const handleSendMessage = async () => {
     if (!inputValue.trim()) return;
 
@@ -331,9 +361,8 @@ export default function ChatPage() {
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">
-                    <DropdownMenuItem>Clear Chat</DropdownMenuItem>
-                    <DropdownMenuItem>Export Chat</DropdownMenuItem>
-                    <DropdownMenuItem>Settings</DropdownMenuItem>
+                    <DropdownMenuItem onClick={handleClearChat}>Clear Chat</DropdownMenuItem>
+                    <DropdownMenuItem onClick={handleExportChat}>Export Chat</DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
               </div>

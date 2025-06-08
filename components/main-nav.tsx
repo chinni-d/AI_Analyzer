@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import Link from "next/link"
+import Image from "next/image"; // Import the Next.js Image component
 import { usePathname } from "next/navigation"
 import { FileText, Menu, X } from "lucide-react"
 import { cn } from "@/lib/utils"
@@ -61,10 +62,8 @@ export function MainNav() {
             <div className="flex flex-col space-y-6 py-4">
               <div className="flex items-center justify-between px-4">
                 <Link href="/" className="flex items-center gap-2" onClick={handleNavItemClick}>
-                  <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-                    <FileText className="size-4" />
-                  </div>
-                  <span className="font-semibold">Document QA</span>
+                  <Image src="/logo.png" alt="Document Analyzer Logo" width={28} height={28} className="h-7 w-7 invert dark:invert-0" /> 
+                  <span className="font-semibold">Doc Analyzer</span>
                 </Link>
                 <Button variant="ghost" size="icon" onClick={() => setOpen(false)}>
                   <span className="sr-only">Close</span>
@@ -94,8 +93,9 @@ export function MainNav() {
         {/* Logo */}
         <div className="flex items-center flex-1">
           <Link href="/" className="flex items-center gap-2">
+            <Image src="/logo.png" alt="Document Analyzer Logo" width={32} height={32} className="h-8 w-8 invert dark:invert-0" />
             <span className="font-semibold hidden sm:inline-block">Document Analyzer</span>
-            <span className="font-semibold sm:hidden">Doc QA</span>
+            <span className="font-semibold sm:hidden">Doc Analyzer</span>
           </Link>
         </div>
 
