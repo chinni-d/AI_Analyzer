@@ -220,7 +220,7 @@ export default function AboutPage() {
               <AnimatedSection className="block-container">
                 <motion.div whileHover={{ scale: 1.03, transition: { duration: 0.2 } }} className="h-full">
                   <div className="p-6 border rounded-xl space-y-4 h-full"> {/* Added h-full */}
-                    <h4 className="text-lg font-semibold text-black/50 dark:text-white/70">Backend & Database</h4>
+                    <h4 className="text-lg font-semibold text-black/50 dark:text-white/70">Backend & Infrastructure</h4>
                     <div className="space-y-2 text-sm text-black/40 dark:text-white">
                       <div className="flex items-center gap-2">
                         <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
