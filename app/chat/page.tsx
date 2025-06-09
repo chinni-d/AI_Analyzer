@@ -554,7 +554,7 @@ export default function ChatPage() {
                         onChange={(e) => setInputValue(e.target.value)}
                         onKeyPress={handleKeyPress}
                         placeholder={`Ask about ${selectedFileIndex !== null ? uploadedFiles[selectedFileIndex]?.name : 'your documents'}...`}
-                        className="w-full pr-16 resize-none min-h-[60px] max-h-[200px] py-3 pl-4 text-sm"
+                        className="w-full pr-16 resize-none min-h-[48px] max-h-[200px] py-3 pl-4 text-base md:text-sm" // MODIFIED: text-sm to text-base md:text-sm
                         rows={1} // Start with 1 row, will auto-expand
                       />
                       <Button
