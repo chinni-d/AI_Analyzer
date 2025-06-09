@@ -348,13 +348,14 @@ export default function ChatPage() {
             {/* Main Chat Area */}
             <div className="lg:col-span-3 flex flex-col h-[calc(100vh-120px)] overflow-hidden">
               <Card className="flex-1 flex flex-col h-full bg-transparent">
-                <CardHeader className="border-b">
+                {/* MODIFIED: Adjusted padding for CardHeader, title and description text sizes for mobile */}
+                <CardHeader className="border-b px-4 py-3 md:px-6 md:py-4">
                   <div className="flex items-center justify-between">
                     <div>
-                      <CardTitle className="text-xl">
+                      <CardTitle className="text-lg md:text-xl">
                         Chat with Your Documents
                       </CardTitle>
-                      <p className="text-sm text-black dark:text-white mt-1">
+                      <p className="text-xs md:text-sm text-black dark:text-white mt-1">
                         Ask questions and get AI-powered insights from your uploaded
                         documents
                       </p>
@@ -375,7 +376,8 @@ export default function ChatPage() {
 
                 <CardContent className="flex-1 flex flex-col p-0 overflow-hidden">
                   <div className="flex-1 overflow-y-auto p-4">
-                    <div className="space-y-6 break-words">
+                    {/* MODIFIED: Reduced space between messages on mobile */}
+                    <div className="space-y-4 md:space-y-6 break-words">
                       {messages.map((message) => (
                         <div key={message.id} className="group">
                           <div
@@ -426,7 +428,8 @@ export default function ChatPage() {
                                 >
                                   <span>{message.timeString}</span>
                                   {message.type === "assistant" && (
-                                    <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                                    // MODIFIED: Message actions always visible on mobile, hover on desktop
+                                    <div className="flex items-center gap-1 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
                                       <Button
                                         variant="ghost"
                                         size="icon"
