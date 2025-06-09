@@ -25,7 +25,7 @@ export function ThemeToggle() {
   ]
 
   return (
-    <div className="flex items-center bg-muted rounded-lg p-1">
+    <div className="flex items-center bg-muted rounded-lg p-0.5 md:p-1">
       {themes.map(({ name, icon: Icon, label }) => (
         <Button
           key={name}
@@ -33,12 +33,12 @@ export function ThemeToggle() {
           size="sm"
           onClick={() => setTheme(name)}
           className={cn(
-            "h-8 w-8 p-0 transition-all",
+            "h-7 w-7 md:h-8 md:w-8 p-0 transition-all",
             theme === name ? "bg-background text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground",
           )}
           title={label}
         >
-          <Icon className="h-4 w-4" />
+          <Icon className="h-3.5 w-3.5 md:h-4 md:w-4" />
           <span className="sr-only">{label}</span>
         </Button>
       ))}
