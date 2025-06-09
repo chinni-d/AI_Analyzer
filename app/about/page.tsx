@@ -224,19 +224,19 @@ export default function AboutPage() {
                     <div className="space-y-2 text-sm text-black/40 dark:text-white">
                       <div className="flex items-center gap-2">
                         <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
-                        <span>Node.js with Express.js</span>
+                        <span>Python via Uvicorn</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-                        <span>Python (Flask/FastAPI - for ML)</span>
+                        <span>FAISS</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
-                        <span>Pinecone (Vector Database)</span>
+                        <span>Document Processing </span>
                       </div>
                       <div className="flex items-center gap-2">
                         <div className="w-2 h-2 bg-teal-500 rounded-full"></div>
-                        <span>Langchain (LLM Orchestration)</span>
+                        <span>FAST API</span>
                       </div>
                     </div>
                   </div>
