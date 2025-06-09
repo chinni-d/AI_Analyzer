@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { Separator } from "@/components/ui/separator" // Import Separator
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs"
 
 const navItems = [
   {
@@ -133,9 +134,19 @@ export function MainNav() {
           ))}
         </nav>
 
-        {/* Theme Toggle */}
-        <div className="flex items-center flex-1 justify-end">
-          <ThemeToggle />
+        {/* Theme Toggle & Sign In Button */}
+        <div className="flex items-center flex-1 justify-end space-x-4"> {/* MODIFIED: Added space-x-4 for spacing */}
+          <ThemeToggle /> {/* MOVED: ThemeToggle now comes first */}
+          <SignedOut>
+            <SignInButton mode="modal">
+              <Button variant="outline" size="sm" className="flex items-center dark:bg-transparent">
+                <span>Sign In</span> {/* Text only, removed responsive classes for icon */}
+              </Button>
+            </SignInButton>
+          </SignedOut>
+          <SignedIn>
+            <UserButton />
+          </SignedIn>
         </div>
       </div>
     </header>
