@@ -41,6 +41,9 @@ interface Message {
 export default function ChatPage() {
   const { user } = useUser(); // ADDED: Get user data from Clerk
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const messagesEndRef = useRef<HTMLDivElement>(null); // Keep this for marking the end
+  const scrollAreaRef = useRef<React.ElementRef<typeof ScrollArea>>(null); // Ensure scrollAreaRef is defined
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
@@ -74,8 +77,6 @@ export default function ChatPage() {
     null
   );
   const [isTyping, setIsTyping] = useState(false);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const handleClearChat = () => {
     setMessages([
@@ -195,9 +196,11 @@ export default function ChatPage() {
   ];
 
   useEffect(() => {
-    const container = document.querySelector(".overflow-y-auto");
-    if (container) {
-      container.scrollTop = container.scrollHeight;
+    const element = messagesEndRef.current;
+    if (element) {
+      setTimeout(() => {
+        element.scrollIntoView({ behavior: "auto", block: "nearest" });
+      }, 150); // Increased timeout slightly for reliability
     }
   }, [messages]);
 
@@ -376,9 +379,13 @@ export default function ChatPage() {
                 </CardHeader>
 
                 <CardContent className="flex-1 flex flex-col p-0 overflow-hidden">
-                  <div className="flex-1 overflow-y-auto p-4">
-                    {/* MODIFIED: Reduced space between messages on mobile */}
-                    <div className="space-y-4 md:space-y-6 break-words">
+                  <ScrollArea
+                    ref={scrollAreaRef}
+                    className="flex-1" // MODIFIED: Removed p-4 from here
+                    scrollbarClassName="lg:hidden"
+                  >
+                    {/* MODIFIED: Added p-4 to this inner div */}
+                    <div className="p-4 space-y-4 md:space-y-6 break-words">
                       {messages.map((message) => (
                         <div key={message.id} className="group">
                           <div
@@ -535,7 +542,7 @@ export default function ChatPage() {
                       )}
                       <div ref={messagesEndRef} />
                     </div>
-                  </div>
+                  </ScrollArea>
 
                   {/* Sample Questions for Mobile */}
                   <div className="lg:hidden p-4 border-t bg-muted/30">
