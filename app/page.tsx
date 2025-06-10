@@ -106,8 +106,8 @@ export default function HomePage() {
                 Upload your documents and get instant, accurate answers using advanced Retrieval-Augmented Generation
                 (RAG) technology.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
-                <Button asChild size="lg" className="text-base">
+              <div className="flex flex-row gap-3 sm:gap-4 justify-center mt-8">
+                <Button asChild size="lg" className="text-sm sm:text-base w-36 sm:w-auto">
                   <Link href="/chat">
                     Start Chatting
                     <motion.div
@@ -117,6 +117,11 @@ export default function HomePage() {
                     >
                       <ArrowRight className="h-4 w-4" />
                     </motion.div>
+                  </Link>
+                </Button>
+                <Button asChild size="lg" variant="outline" className="text-sm sm:text-base w-32 sm:w-auto bg-transparent hover:bg-transparent">
+                  <Link href="/about">
+                    Learn More
                   </Link>
                 </Button>
               </div>

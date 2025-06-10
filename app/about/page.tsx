@@ -2,6 +2,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Button } from "@/components/ui/button"
 import { Brain, Database, Search, Zap, Shield, Globe, Github, Linkedin, Mail , Globe2} from "lucide-react"
 import Link from "next/link"
 import { SparklesText } from "@/components/sparkles-text"
@@ -316,7 +317,7 @@ export default function AboutPage() {
                   <div className="flex-1 text-center md:text-left space-y-4">
                     <div>
                       <h3 className="text-2xl font-semibold text-black/50 dark:text-white/70">Manikanta Darapureddy</h3>
-                      <p className="text-lg text-black/40 dark:text-white">Full Stack AI Engineer</p>
+   
                     </div>
                     <p className="text-black/40 dark:text-white leading-relaxed text-sm lg:text-base">
                       Passionate about building AI-powered applications that solve real-world problems. With expertise in
@@ -348,92 +349,40 @@ export default function AboutPage() {
           </motion.div>
         </AnimatedSection>
 
-        {/* Use Cases */}
+        {/* Have Questions Section */}
         <AnimatedSection className="block-container">
-          <Card className="bg-transparent">
-            <CardHeader>
-              <CardTitle className="text-2xl">Use Cases & Applications</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="space-y-6">
-                  <div>
-                    <h4 className="text-lg font-semibold mb-3 text-black/50 dark:text-white/70">Research & Academia</h4>
-                    <ul className="space-y-2 text-black/40 dark:text-white">
-                      <li className="flex items-start gap-2">
-                        <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                        <span>Analyze research papers and publications</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                        <span>Extract key findings and methodologies</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                        <span>Compare multiple documents and studies</span>
-                      </li>
-                    </ul>
-                  </div>
-
-                  <div>
-                    <h4 className="text-lg font-semibold mb-3 text-black/50 dark:text-white/70">Business & Legal</h4>
-                    <ul className="space-y-2 text-black/40 dark:text-white">
-                      <li className="flex items-start gap-2">
-                        <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                        <span>Review contracts and agreements</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                        <span>Analyze financial reports and statements</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                        <span>Extract compliance and regulatory information</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div className="space-y-6">
-                  <div>
-                    <h4 className="text-lg font-semibold mb-3 text-black/50 dark:text-white/70">Education & Learning</h4>
-                    <ul className="space-y-2 text-black/40 dark:text-white">
-                      <li className="flex items-start gap-2">
-                        <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                        <span>Study textbooks and educational materials</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                        <span>Get explanations of complex topics</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                        <span>Create personalized study guides</span>
-                      </li>
-                    </ul>
-                  </div>
-
-                  <div>
-                    <h4 className="text-lg font-semibold mb-3 text-black/50 dark:text-white/70">Personal & Professional</h4>
-                    <ul className="space-y-2 text-black/40 dark:text-white">
-                      <li className="flex items-start gap-2">
-                        <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                        <span>Organize and search personal documents</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                        <span>Extract information from manuals and guides</span>
-                      </li>
-                      <li className="flex items-start gap-2">
-                        <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                        <span>Analyze reports and technical documentation</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+          <motion.div whileHover={{ scale: 1.015 }}>
+            <Card className="bg-transparent">
+              <CardHeader>
+                <CardTitle className="text-2xl text-center">Have any questions?</CardTitle>
+                <CardDescription className="text-base text-black/40 dark:text-white text-center">
+                  Start a conversation with our Document Analyzer for more help.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="text-center">
+                <Link href="/chat">
+                  <motion.div
+                    animate={{ 
+                      y: [0, -10, 0] 
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  >
+                    <Button 
+                      size="sm" 
+                      variant="outline"
+                      className="bg-black dark:bg-white text-white dark:text-black border-black dark:border-white hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-black hover:border-black dark:hover:border-white px-6 py-2 text-sm rounded-lg shadow-md"
+                    >
+                      Chat Now
+                    </Button>
+                  </motion.div>
+                </Link>
+              </CardContent>
+            </Card>
+          </motion.div>
         </AnimatedSection>
       </div>
     </div>
