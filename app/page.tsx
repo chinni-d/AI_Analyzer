@@ -102,7 +102,7 @@ export default function HomePage() {
               <h1 className="text-xl md:text-xl lg:text-xl font-bold tracking-tight">
                 Ask Questions About Your Documents
               </h1>
-              <p className="text-base md:text-base max-w-base mx-auto text-black/40 dark:text-white">
+              <p className="text-base md:text-base max-w-base mx-auto text-black/40 dark:text-white/40">
                 Upload your documents and get instant, accurate answers using advanced Retrieval-Augmented Generation
                 (RAG) technology.
               </p>
@@ -138,10 +138,10 @@ export default function HomePage() {
                       <Upload className="h-6 w-6 text-primary" />
                     </div>
                     <CardTitle>Upload Documents</CardTitle>
-                    <CardDescription className="text-black/50 dark:text-white/70">Support for PDF, Word, and text files</CardDescription>
+                    <CardDescription className="text-black/50 dark:text-white/40">Support for PDF, Word, and text files</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-sm text-black/40 dark:text-white">
+                    <p className="text-sm text-black/40 dark:text-white/40">
                       Easily upload your documents and let our AI process them for intelligent querying.
                     </p>
                   </CardContent>
@@ -155,10 +155,10 @@ export default function HomePage() {
                       <MessageSquare className="h-6 w-6 text-primary" />
                     </div>
                     <CardTitle>Ask Questions</CardTitle>
-                    <CardDescription className="text-black/50 dark:text-white/70">Natural language queries</CardDescription>
+                    <CardDescription className="text-black/50 dark:text-white/40">Natural language queries</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-sm text-black/40 dark:text-white">
+                    <p className="text-sm text-black/40 dark:text-white/40">
                       Ask questions in plain English and get precise answers from your documents.
                     </p>
                   </CardContent>
@@ -172,10 +172,10 @@ export default function HomePage() {
                       <Brain className="h-6 w-6 text-primary" />
                     </div>
                     <CardTitle>AI-Powered</CardTitle>
-                    <CardDescription className="text-black/50 dark:text-white/70">Advanced RAG technology</CardDescription>
+                    <CardDescription className="text-black/50 dark:text-white/40">Advanced RAG technology</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-sm text-black/40 dark:text-white">
+                    <p className="text-sm text-black/40 dark:text-white/40">
                       Powered by state-of-the-art retrieval and generation models for accurate responses.
                     </p>
                   </CardContent>
