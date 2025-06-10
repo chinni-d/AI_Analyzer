@@ -28,7 +28,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { toast } from "sonner"; // Import toast
-import { SignedIn, SignedOut, SignIn } from "@clerk/nextjs"; // ADDED: Clerk components
+import { SignedIn, SignedOut, SignIn, useUser } from "@clerk/nextjs"; // MODIFIED: Added useUser
 
 interface Message {
   id: string;
@@ -39,6 +39,7 @@ interface Message {
 }
 
 export default function ChatPage() {
+  const { user } = useUser(); // ADDED: Get user data from Clerk
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -395,14 +396,22 @@ export default function ChatPage() {
                               }`}
                             >
                               <div
-                                className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
+                                className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden ${ // ADDED: overflow-hidden
                                   message.type === "user"
-                                    ? "bg-primary text-primary-foreground"
+                                    ? user?.imageUrl ? 'bg-transparent' : 'bg-primary text-primary-foreground' // MODIFIED: Conditional background, corrected property to imageUrl
                                     : "bg-muted border"
                                 }`}
                               >
                                 {message.type === "user" ? (
-                                  <User className="h-4 w-4" />
+                                  user?.imageUrl ? (
+                                    <img
+                                      src={user.imageUrl} // MODIFIED: Corrected property to imageUrl
+                                      alt={user.fullName || "User avatar"}
+                                      className="w-full h-full object-cover" // Image fills the div, styled to cover
+                                    />
+                                  ) : (
+                                    <User className="h-5 w-5" /> // Fallback icon
+                                  )
                                 ) : (
                                   <Bot className="h-4 w-4" />
                                 )}
