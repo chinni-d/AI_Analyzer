@@ -40,7 +40,7 @@ export function MainNav() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center justify-between">
+      <div className="container flex h-16 items-center justify-between max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Mobile Menu Trigger */}
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger asChild className="md:hidden">
@@ -135,7 +135,7 @@ export function MainNav() {
         </Sheet>
 
         {/* Logo */}
-        <div className="flex items-center flex-1">
+        <div className="flex items-center min-w-0">
           <Link href="/" className="flex items-center gap-2">
             <Image src="/logo.png" alt="Document Analyzer Logo" width={32} height={32} className="h-8 w-8 invert dark:invert-0" />
             <span className="font-semibold hidden sm:inline-block">Document Analyzer</span>
@@ -144,13 +144,13 @@ export function MainNav() {
         </div>
 
         {/* Desktop Navigation - Centered */}
-        <nav className="hidden md:flex items-center space-x-8 flex-1 justify-center">
+        <nav className="hidden md:flex items-center space-x-6 lg:space-x-8 absolute left-1/2 transform -translate-x-1/2">
           {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               className={cn(
-                "text-sm font-medium transition-colors hover:text-primary relative",
+                "text-sm font-normal transition-colors hover:text-primary relative",
                 pathname === item.href ? "text-primary" : "text-muted-foreground",
               )}
             >
@@ -163,12 +163,12 @@ export function MainNav() {
         </nav>
 
         {/* Theme Toggle & Sign In Button */}
-        <div className="flex items-center flex-1 justify-end space-x-4"> {/* MODIFIED: Added space-x-4 for spacing */}
-          <ThemeToggle /> {/* MOVED: ThemeToggle now comes first */}
+        <div className="flex items-center space-x-3 lg:space-x-4 min-w-0">
+          <ThemeToggle />
           <SignedOut>
             <SignInButton mode="modal">
               <Button variant="outline" size="sm" className="flex items-center dark:bg-transparent">
-                <span>Sign In</span> {/* Text only, removed responsive classes for icon */}
+                <span>Sign In</span>
               </Button>
             </SignInButton>
           </SignedOut>
