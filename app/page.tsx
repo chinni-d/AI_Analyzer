@@ -98,7 +98,7 @@ export default function HomePage() {
           {/* Hero Section */}
           <AnimatedSection>
             <div className="text-center space-y-4 mt-12">
-              <MorphingText texts={["Welcome", "to", "AI"]} />
+              <MorphingText texts={["Welcome", "to", "Document", "Analyzer"]} />
               <h1 className="text-xl md:text-xl lg:text-xl font-bold tracking-tight">
                 Ask Questions About Your Documents
               </h1>
