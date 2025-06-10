@@ -49,7 +49,9 @@ export function MainNav() {
               <span className="sr-only">Toggle menu</span>
             </Button>
           </SheetTrigger>
-          <SheetContent side="left" className="w-3/5 p-4 md:w-[250px]"
+          <SheetContent 
+            side="left" 
+            className="w-3/5 p-4 md:w-[250px] bg-white dark:bg-[#161616]"
             onTouchStart={(e) => {
               e.currentTarget.dataset.dragStartX = String(e.touches[0].clientX);
             }}
