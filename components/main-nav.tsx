@@ -51,7 +51,7 @@ export function MainNav() {
           </SheetTrigger>
           <SheetContent 
             side="left" 
-            className="w-3/5 p-4 md:w-[250px] bg-white dark:bg-[#161616]"
+            className="w-64 p-0 md:w-[240px] bg-white dark:bg-[#161616] border-r border-border/50"
             onTouchStart={(e) => {
               e.currentTarget.dataset.dragStartX = String(e.touches[0].clientX);
             }}
@@ -65,45 +65,71 @@ export function MainNav() {
             }}
           >
             <SheetTitle className="sr-only">Main Navigation</SheetTitle>
-            <div className="flex flex-col h-full"> {/* Changed space-y-4 to flex-col h-full for manual spacing control */}
-              <div className="flex items-center justify-between"> {/* Removed mb-2, separator will handle spacing */}
+            <div className="flex flex-col h-full">
+              {/* Header Section */}
+              <div className="px-4 py-4 border-b border-border/20">
                 <Link href="/" className="flex items-center gap-2" onClick={handleNavItemClick}>
-                  <Image src="/logo.png" alt="Document Analyzer Logo" width={24} height={24} className="h-6 w-6 invert dark:invert-0" />
-                  <span className="font-semibold text-md">Doc Analyzer</span>
+                  <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary/10 border border-primary/20">
+                    <Image 
+                      src="/logo.png" 
+                      alt="Document Analyzer Logo" 
+                      width={20} 
+                      height={20} 
+                      className="h-5 w-5 invert dark:invert-0" 
+                    />
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="font-semibold text-sm text-foreground">Doc Analyzer</span>
+                    <span className="text-xs text-muted-foreground">AI Assistant</span>
+                  </div>
                 </Link>
               </div>
 
-              <Separator className="my-3" />
-
-              <nav className="flex flex-col space-y-1.5 flex-grow"> {/* Kept space-y at 1.5 */}
-                {navItems.map((item) => {
-                  const Icon = item.icon;
-                  return (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      onClick={handleNavItemClick}
-                      className={cn(
-                        "group flex items-center gap-2.5 rounded-md px-3 py-2.5 text-sm font-medium transition-all duration-150 ease-in-out hover:bg-accent hover:text-accent-foreground focus-visible:bg-accent focus-visible:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-1 focus-visible:ring-offset-background", // Adjusted padding, gap, text size back to sm
-                        pathname === item.href 
-                          ? "bg-accent text-primary font-semibold shadow-sm"
-                          : "text-muted-foreground hover:text-foreground",
-                      )}
-                    >
-                      <Icon className={cn(
-                        "h-[18px] w-[18px] transition-colors duration-150 ease-in-out", // Slightly increased icon size to 18px
-                        pathname === item.href
-                          ? "text-primary"
-                          : "text-muted-foreground group-hover:text-accent-foreground"
-                      )} />
-                      {item.title}
-                    </Link>
-                  );
-                })}
-              </nav>
-              {/* Optionally, add a ThemeToggle or other footer items here if desired for mobile sidebar */}
-              {/* For example, a fixed ThemeToggle at the bottom: */}
-              {/* <div className="mt-auto"> <ThemeToggle /> </div> */}
+              {/* Navigation Section */}
+              <div className="flex-1 px-2 py-3">
+                <nav className="space-y-1">
+                  {navItems.map((item) => {
+                    const Icon = item.icon;
+                    const isActive = pathname === item.href;
+                    return (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        onClick={handleNavItemClick}
+                        className={cn(
+                          "group flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all duration-200",
+                          "hover:bg-accent/50",
+                          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50",
+                          isActive 
+                            ? "bg-primary/10 text-primary border border-primary/20 font-semibold" 
+                            : "text-muted-foreground hover:text-foreground"
+                        )}
+                      >
+                        <div className={cn(
+                          "flex items-center justify-center w-6 h-6 rounded-md transition-all duration-200",
+                          isActive 
+                            ? "bg-primary/20 text-primary" 
+                            : "text-muted-foreground group-hover:text-accent-foreground"
+                        )}>
+                          <Icon className="h-4 w-4" />
+                        </div>
+                        <span className="flex-1">{item.title}</span>
+                        {isActive && (
+                          <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+                        )}
+                      </Link>
+                    );
+                  })}
+                </nav>
+                
+                {/* Theme Toggle - Right below nav items */}
+                <div className="mt-6 px-1">
+                  <Separator className="mb-4" />
+                  <div className="flex justify-center">
+                    <ThemeToggle />
+                  </div>
+                </div>
+              </div>
             </div>
           </SheetContent>
         </Sheet>
