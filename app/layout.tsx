@@ -45,7 +45,7 @@ export default function RootLayout({
                   function updateThemeColor() {
                     const isDark = document.documentElement.classList.contains('dark') || 
                                   (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
-                    const themeColor = isDark ? '#161616' : '#ffffff';
+                    const themeColor = isDark ? '#0a0a0a' : '#ffffff';
                     
                     let metaThemeColor = document.querySelector('meta[name="theme-color"]');
                     if (!metaThemeColor) {

@@ -4,11 +4,12 @@ import * as React from "react"
 import Link from "next/link"
 import Image from "next/image";
 import { usePathname } from "next/navigation"
-import { Menu, X, HomeIcon, MessageSquare, Info } from "lucide-react"
+import { Menu, X, HomeIcon, MessageSquare, Info, Sun, Moon } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet"
 import { ThemeToggle } from "@/components/theme-toggle"
+import { useTheme } from "next-themes"
 import { Separator } from "@/components/ui/separator" // Import Separator
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs"
 
@@ -33,10 +34,34 @@ const navItems = [
 export function MainNav() {
   const pathname = usePathname()
   const [open, setOpen] = React.useState(false)
+  const { theme, setTheme } = useTheme()
+  const [mounted, setMounted] = React.useState(false)
+
+  React.useEffect(() => {
+    setMounted(true)
+  }, [])
 
   const handleNavItemClick = () => {
     setOpen(false)
   }
+
+  const toggleTheme = () => {
+    if (theme === "light") {
+      setTheme("dark")
+    } else if (theme === "dark") {
+      setTheme("system")
+    } else {
+      setTheme("light")
+    }
+  }
+
+  const getThemeIcon = () => {
+    if (!mounted) return Sun
+    if (theme === "dark") return Moon
+    return Sun
+  }
+
+  const ThemeIcon = getThemeIcon()
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -51,7 +76,7 @@ export function MainNav() {
           </SheetTrigger>
           <SheetContent 
             side="left" 
-            className="w-64 p-0 md:w-[240px] bg-white dark:bg-[#161616] border-r border-border/50"
+            className="w-64 p-0 md:w-[240px] bg-white dark:bg-[#0a0a0a] border-r border-border/50"
             onTouchStart={(e) => {
               e.currentTarget.dataset.dragStartX = String(e.touches[0].clientX);
             }}
@@ -84,6 +109,9 @@ export function MainNav() {
                   </div>
                 </Link>
               </div>
+
+              {/* Separator */}
+              <Separator />
 
               {/* Navigation Section */}
               <div className="flex-1 px-2 py-3">
@@ -164,7 +192,25 @@ export function MainNav() {
 
         {/* Theme Toggle & Sign In Button */}
         <div className="flex items-center space-x-3 lg:space-x-4 min-w-0">
-          <ThemeToggle />
+          {/* Compact Mobile Theme Toggle */}
+          {mounted && (
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={toggleTheme}
+              className="md:hidden h-9 w-9"
+              title={`Switch to ${theme === "light" ? "dark" : theme === "dark" ? "system" : "light"} mode`}
+            >
+              <ThemeIcon className="h-4 w-4" />
+              <span className="sr-only">Toggle theme</span>
+            </Button>
+          )}
+          
+          {/* Desktop Theme Toggle */}
+          <div className="hidden md:block">
+            <ThemeToggle />
+          </div>
+          
           <SignedOut>
             <SignInButton mode="modal">
               <Button variant="outline" size="sm" className="flex items-center dark:bg-transparent">
