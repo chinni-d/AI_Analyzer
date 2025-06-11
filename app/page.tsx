@@ -102,7 +102,7 @@ export default function HomePage() {
               <h1 className="text-xl md:text-xl lg:text-xl font-bold tracking-tight">
               Ask Questions About Your Documents
               </h1>
-              <p className="text-base md:text-base max-w-base mx-auto text-black/40 dark:text-white/40">
+              <p className="text-base md:text-base max-w-base mx-auto text-black/80 dark:text-white/80">
               Upload your documents and get instant, accurate answers using advanced Retrieval-Augmented Generation
               (RAG) technology.
               </p>

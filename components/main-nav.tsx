@@ -36,10 +36,58 @@ export function MainNav() {
   const [open, setOpen] = React.useState(false)
   const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = React.useState(false)
+  const [activeIndicator, setActiveIndicator] = React.useState({ left: 0, width: 0 })
+  const [isAnimating, setIsAnimating] = React.useState(false)
+  const navRef = React.useRef<HTMLDivElement>(null)
+  const timeoutRef = React.useRef<NodeJS.Timeout | null>(null)
 
   React.useEffect(() => {
     setMounted(true)
   }, [])
+
+  React.useEffect(() => {
+    const updateIndicator = () => {
+      if (!navRef.current) return
+      
+      const activeLink = navRef.current.querySelector(`[data-href="${pathname}"]`) as HTMLElement
+      if (activeLink) {
+        const navRect = navRef.current.getBoundingClientRect()
+        const linkRect = activeLink.getBoundingClientRect()
+        
+        // Clear existing timeout
+        if (timeoutRef.current) {
+          clearTimeout(timeoutRef.current)
+        }
+        
+        // Start animation
+        setIsAnimating(true)
+        
+        setActiveIndicator({
+          left: linkRect.left - navRect.left,
+          width: linkRect.width
+        })
+        
+        // End animation after transition completes
+        timeoutRef.current = setTimeout(() => {
+          setIsAnimating(false)
+        }, 500)
+      }
+    }
+
+    if (mounted) {
+      // Update immediately
+      updateIndicator()
+      
+      // Update on resize
+      window.addEventListener('resize', updateIndicator)
+      return () => {
+        window.removeEventListener('resize', updateIndicator)
+        if (timeoutRef.current) {
+          clearTimeout(timeoutRef.current)
+        }
+      }
+    }
+  }, [pathname, mounted])
 
   const handleNavItemClick = () => {
     setOpen(false)
@@ -172,20 +220,30 @@ export function MainNav() {
         </div>
 
         {/* Desktop Navigation - Centered */}
-        <nav className="hidden md:flex items-center space-x-6 lg:space-x-8 absolute left-1/2 transform -translate-x-1/2">
+        <nav 
+          ref={navRef}
+          className="hidden md:flex items-center space-x-6 lg:space-x-8 absolute left-1/2 transform -translate-x-1/2"
+        >
+          {/* Animated indicator */}
+          <div 
+            className="absolute -bottom-1 h-0.5 bg-primary rounded-full transition-all duration-300 ease-in-out"
+            style={{
+              left: activeIndicator.left,
+              width: activeIndicator.width,
+            }}
+          />
+          
           {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
+              data-href={item.href}
               className={cn(
                 "text-sm font-normal transition-colors hover:text-primary relative",
                 pathname === item.href ? "text-primary" : "text-muted-foreground",
               )}
             >
               {item.title}
-              {pathname === item.href && (
-                <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary rounded-full" />
-              )}
             </Link>
           ))}
         </nav>
