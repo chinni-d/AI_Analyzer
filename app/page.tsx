@@ -97,33 +97,33 @@ export default function HomePage() {
         <div className="max-w-4xl mx-auto space-y-8">
           {/* Hero Section */}
           <AnimatedSection>
-            <div className="text-center space-y-4 mt-12">
+            <div className="text-center space-y-4 mt-12 opacity-70">
               <MorphingText texts={["Welcome", "to", "Document", "Analyzer"]} />
               <h1 className="text-xl md:text-xl lg:text-xl font-bold tracking-tight">
-                Ask Questions About Your Documents
+              Ask Questions About Your Documents
               </h1>
               <p className="text-base md:text-base max-w-base mx-auto text-black/40 dark:text-white/40">
-                Upload your documents and get instant, accurate answers using advanced Retrieval-Augmented Generation
-                (RAG) technology.
+              Upload your documents and get instant, accurate answers using advanced Retrieval-Augmented Generation
+              (RAG) technology.
               </p>
               <div className="flex flex-row gap-3 sm:gap-4 justify-center mt-8">
-                <Button asChild size="lg" className="text-sm sm:text-base w-36 sm:w-auto">
-                  <Link href="/chat">
-                    Start Chatting
-                    <motion.div
-                      className="ml-2 inline-block"
-                      animate={{ x: [0, 5, 0] }}
-                      transition={{ repeat: Infinity, duration: 1 }}
-                    >
-                      <ArrowRight className="h-4 w-4" />
-                    </motion.div>
-                  </Link>
-                </Button>
-                <Button asChild size="lg" variant="outline" className="text-sm sm:text-base w-32 sm:w-auto bg-transparent hover:bg-transparent">
-                  <Link href="/about">
-                    Learn More
-                  </Link>
-                </Button>
+              <Button asChild size="lg" className="text-sm sm:text-base w-36 sm:w-auto">
+                <Link href="/chat">
+                Start Chatting
+                <motion.div
+                  className="ml-2 inline-block"
+                  animate={{ x: [0, 5, 0] }}
+                  transition={{ repeat: Infinity, duration: 1 }}
+                >
+                  <ArrowRight className="h-4 w-4" />
+                </motion.div>
+                </Link>
+              </Button>
+              <Button asChild size="lg" variant="outline" className="text-sm sm:text-base w-32 sm:w-auto bg-transparent hover:bg-transparent">
+                <Link href="/about">
+                Learn More
+                </Link>
+              </Button>
               </div>
             </div>
           </AnimatedSection>
@@ -137,7 +137,7 @@ export default function HomePage() {
                     <div className="mx-auto w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
                       <Upload className="h-6 w-6 text-primary" />
                     </div>
-                    <CardTitle>Upload Documents</CardTitle>
+                    <CardTitle className="opacity-80">Upload Documents</CardTitle>
                     <CardDescription className="text-black/50 dark:text-white/40">Support for PDF, Word, and text files</CardDescription>
                   </CardHeader>
                   <CardContent>
@@ -154,7 +154,7 @@ export default function HomePage() {
                     <div className="mx-auto w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
                       <MessageSquare className="h-6 w-6 text-primary" />
                     </div>
-                    <CardTitle>Ask Questions</CardTitle>
+                    <CardTitle className="opacity-80">Ask Questions</CardTitle>
                     <CardDescription className="text-black/50 dark:text-white/40">Natural language queries</CardDescription>
                   </CardHeader>
                   <CardContent>
@@ -171,7 +171,7 @@ export default function HomePage() {
                     <div className="mx-auto w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
                       <Brain className="h-6 w-6 text-primary" />
                     </div>
-                    <CardTitle>AI-Powered</CardTitle>
+                    <CardTitle className="opacity-80">AI-Powered</CardTitle>
                     <CardDescription className="text-black/50 dark:text-white/40">Advanced RAG technology</CardDescription>
                   </CardHeader>
                   <CardContent>
