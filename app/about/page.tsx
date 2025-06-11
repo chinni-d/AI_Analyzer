@@ -43,7 +43,7 @@ export default function AboutPage() {
           <motion.div whileHover={{ scale: 1.02 }} transition={{ duration: 0.2 }}>
             <Card className="bg-transparent">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-2xl">
+                <CardTitle className="flex items-center gap-2 text-2xl opacity-80">
                   <Brain className="h-6 w-6" />
                   Project Overview
                 </CardTitle>
@@ -55,7 +55,7 @@ export default function AboutPage() {
                 Generation (RAG) architecture, it combines the power of information retrieval with large language models
                 to provide accurate, contextual answers.
               </p>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2 opacity-80 justify-center md:justify-start">
                 <Badge variant="secondary" className="text-sm">
                   RAG Architecture
                 </Badge>
@@ -85,8 +85,8 @@ export default function AboutPage() {
           <motion.div whileHover={{ scale: 1.02 }} transition={{ duration: 0.2 }}>
             <Card className="bg-transparent">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-2xl">
-                <Database className="h-6 w-6" />
+              <CardTitle className="flex items-center gap-2 text-2xl opacity-80">
+                <Database className="h-6 w-6 " />
                 RAG Architecture
               </CardTitle>
               <CardDescription className="text-base text-black/40 dark:text-white/40">
@@ -136,7 +136,7 @@ export default function AboutPage() {
         {/* Technical Stack */}
         <Card className="bg-transparent">
           <CardHeader>
-            <CardTitle className="text-2xl">Technology Stack</CardTitle>
+            <CardTitle className="text-2xl opacity-80">Technology Stack</CardTitle>
             <CardDescription className="text-base text-black/40 dark:text-white/40">
               Built with modern technologies for optimal performance and scalability
             </CardDescription>
@@ -229,7 +229,7 @@ export default function AboutPage() {
           <motion.div whileHover={{ scale: 1.02 }} transition={{ duration: 0.2 }}>
             <Card className="bg-transparent">
             <CardHeader>
-              <CardTitle className="text-2xl">Key Features</CardTitle>
+              <CardTitle className="text-2xl opacity-80">Key Features</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -282,7 +282,7 @@ export default function AboutPage() {
           <motion.div whileHover={{ scale: 1.02 }} transition={{ duration: 0.2 }}>
             <Card className="bg-transparent">
             <CardHeader>
-              <CardTitle className="text-2xl">Meet the Developer</CardTitle>
+              <CardTitle className="text-2xl opacity-80">Meet the Developer</CardTitle>
               <CardDescription className="text-base text-black/40 dark:text-white/40">The creator behind this Document Analyzer</CardDescription>
             </CardHeader>
             <CardContent>
@@ -293,7 +293,11 @@ export default function AboutPage() {
                 </Avatar>
                 <div className="flex-1 text-center md:text-left space-y-4">
                   <div>
-                    <h3 className="text-2xl font-semibold text-black/50 dark:text-white/40">Manikanta Darapureddy</h3>
+                    <h3
+                      className="text-2xl font-semibold text-black/60 dark:text-white/60 md:[font-family:'Segoe_Script','Brush_Script_MT',cursive]"
+                    >
+                      Manikanta Darapureddy
+                    </h3>
  
                   </div>
                   <p className="text-black/40 dark:text-white/40 leading-relaxed text-sm lg:text-base">
