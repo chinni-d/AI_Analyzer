@@ -29,6 +29,14 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { toast } from "sonner"; // Import toast
 import { SignedIn, SignedOut, SignIn, useUser } from "@clerk/nextjs"; // MODIFIED: Added useUser
+import { Tiles } from "@/components/tiles";
+
+// Add mammoth for DOCX processing
+declare global {
+  interface Window {
+    mammoth: any;
+  }
+}
 
 interface Message {
   id: string;
@@ -44,6 +52,64 @@ export default function ChatPage() {
   const messagesEndRef = useRef<HTMLDivElement>(null); // Keep this for marking the end
   const scrollAreaRef = useRef<React.ElementRef<typeof ScrollArea>>(null); // Ensure scrollAreaRef is defined
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  // Function to extract text content from different file types
+  const extractTextFromFile = async (file: File): Promise<string | null> => {
+    const fileExtension = '.' + file.name.split('.').pop()?.toLowerCase();
+    
+    try {
+      switch (fileExtension) {
+        case '.txt':
+          // Read text file directly
+          return await file.text();
+          
+        case '.docx':
+          // Read DOCX file using mammoth.js
+          return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = async (e) => {
+              try {
+                // Load mammoth.js dynamically if not already loaded
+                if (!window.mammoth) {
+                  const script = document.createElement('script');
+                  script.src = 'https://cdn.jsdelivr.net/npm/mammoth@1.6.0/mammoth.browser.min.js';
+                  script.onload = async () => {
+                    try {
+                      const result = await window.mammoth.extractRawText({ arrayBuffer: e.target?.result });
+                      resolve(result.value || '');
+                    } catch (error) {
+                      console.error('Mammoth extraction error:', error);
+                      reject(error);
+                    }
+                  };
+                  script.onerror = () => reject(new Error('Failed to load mammoth.js'));
+                  document.head.appendChild(script);
+                } else {
+                  const result = await window.mammoth.extractRawText({ arrayBuffer: e.target?.result });
+                  resolve(result.value || '');
+                }
+              } catch (error) {
+                console.error('DOCX processing error:', error);
+                reject(error);
+              }
+            };
+            reader.onerror = () => reject(new Error('Failed to read file'));
+            reader.readAsArrayBuffer(file);
+          });
+          
+        case '.pdf':
+          // For PDF, we'll still rely on backend processing for now
+          // Could add PDF.js here in the future
+          return null;
+          
+        default:
+          return null;
+      }
+    } catch (error) {
+      console.error(`Error extracting text from ${fileExtension} file:`, error);
+      return null;
+    }
+  };
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
@@ -112,9 +178,47 @@ export default function ChatPage() {
     if (!inputValue.trim()) return;
 
     let file: File | undefined;
+    let extractedText: string | null = null;
+    
     // Only set the file if a file is explicitly selected
     if (selectedFileIndex !== null && uploadedFiles[selectedFileIndex]) {
       file = uploadedFiles[selectedFileIndex];
+      
+      // Validate file type
+      const validTypes = ['.pdf', '.docx', '.txt'];
+      const fileExtension = '.' + file.name.split('.').pop()?.toLowerCase();
+      
+      if (!validTypes.includes(fileExtension)) {
+        toast.error(`File type ${fileExtension} is not supported. Please upload PDF, DOCX, or TXT files.`);
+        return;
+      }
+      
+      // Check file size (max 10MB)
+      if (file.size > 10 * 1024 * 1024) {
+        toast.error('File size must be less than 10MB.');
+        return;
+      }
+
+      // Extract text content for TXT and DOCX files
+      if (fileExtension === '.txt' || fileExtension === '.docx') {
+        try {
+          toast.loading(`Reading ${fileExtension.toUpperCase()} file...`);
+          extractedText = await extractTextFromFile(file);
+          toast.dismiss();
+          
+          if (extractedText && extractedText.trim()) {
+            console.log(`Successfully extracted ${extractedText.length} characters from ${file.name}`);
+          } else {
+            toast.error(`Could not extract text from ${file.name}. The file may be empty or corrupted.`);
+            return;
+          }
+        } catch (error) {
+          toast.dismiss();
+          toast.error(`Failed to read ${file.name}. Please try a different file or format.`);
+          console.error('Text extraction error:', error);
+          return;
+        }
+      }
     }
 
     // Add file context to the user message for clarity only if a file is being used
@@ -134,10 +238,46 @@ export default function ChatPage() {
 
     try {
       const formData = new FormData();
+      
       if (file) {
-        formData.append("file", file);
+        const fileExtension = '.' + file.name.split('.').pop()?.toLowerCase();
+        
+        if (extractedText && (fileExtension === '.txt' || fileExtension === '.docx')) {
+          // For TXT and DOCX files with extracted text, send the text content directly
+          const enhancedQuestion = `${inputValue}
+
+Document: ${file.name}
+Content:
+${extractedText}`;
+          
+          formData.append("question", enhancedQuestion);
+          formData.append("document_name", file.name);
+          formData.append("document_type", fileExtension.substring(1));
+          formData.append("has_document_content", "true");
+          
+          console.log(`Sending extracted text from ${file.name} (${extractedText.length} characters)`);
+          
+        } else if (fileExtension === '.pdf') {
+          // For PDF files, send the file to backend for processing
+          formData.append("file", file);
+          formData.append("question", inputValue);
+          formData.append("file_type", "pdf");
+          formData.append("file_name", file.name);
+          formData.append("file_size", file.size.toString());
+          
+          console.log(`Sending PDF file: ${file.name} (${file.size} bytes)`);
+          
+        } else {
+          // Fallback for other cases
+          formData.append("file", file);
+          formData.append("question", inputValue);
+          formData.append("file_type", fileExtension.substring(1));
+          formData.append("file_name", file.name);
+        }
+      } else {
+        // No file, just send question
+        formData.append("question", inputValue);
       }
-      formData.append("question", inputValue);
 
       const response = await fetch("https://docapi.dmanikanta.site/ask", {
         method: "POST",
@@ -145,18 +285,50 @@ export default function ChatPage() {
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        const errorText = await response.text();
+        throw new Error(`HTTP ${response.status}: ${errorText || response.statusText}`);
       }
 
       const data = await response.json();
-      console.log("API Response:", data); // ✅ DEBUG LOG
+      console.log("API Response:", data);
+
+      // Handle response
+      let assistantContent = "";
+      if (data.answer && data.answer.trim()) {
+        assistantContent = data.answer;
+      } else if (data.error) {
+        if (extractedText && file) {
+          // If we have extracted text but still got an error, the issue might be with the backend
+          assistantContent = `❌ Backend processing error: ${data.error}
+
+However, I was able to read your ${file.name} file successfully. The document contains ${extractedText.length} characters of text.
+
+**Alternative**: You can ask me questions about the content directly by copying and pasting the text, or try uploading the document as a PDF format.`;
+        } else {
+          assistantContent = `❌ Error: ${data.error}`;
+        }
+      } else if (data.message && data.message.trim()) {
+        assistantContent = data.message;
+      } else {
+        if (extractedText && file) {
+          assistantContent = `✅ Successfully read ${file.name} (${extractedText.length} characters)
+
+The backend didn't return a specific response, but I have access to your document content. You can now ask me specific questions about the document, and I'll be able to help analyze the content.
+
+Try asking questions like:
+• "What are the main topics in this document?"
+• "Can you summarize the key points?"
+• "What are the important details?"`;
+        } else {
+          assistantContent = "❌ No response received from the service. Please try again.";
+        }
+      }
 
       const now2 = new Date();
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
         type: "assistant",
-        content:
-          data.answer || "❌ Sorry, no answer was returned from the backend.",
+        content: assistantContent,
         timestamp: now2,
         timeString: now2.toLocaleTimeString(),
       };
@@ -165,12 +337,14 @@ export default function ChatPage() {
     } catch (err) {
       console.error("Error while calling backend:", err);
       const now3 = new Date();
+      const errorMessage = err instanceof Error ? err.message : "Unknown error";
+      
       setMessages((prev) => [
         ...prev,
         {
           id: Date.now().toString(),
           type: "assistant",
-          content: "❌ Failed to connect to the backend or process the file.",
+          content: `❌ Failed to connect to the backend: ${errorMessage}. Please check your internet connection and try again.`,
           timestamp: now3,
           timeString: now3.toLocaleTimeString(),
         },
@@ -206,8 +380,13 @@ export default function ChatPage() {
 
   return (
     <>
+      {/* Grid Background - Fixed positioning */}
+      <div className="fixed inset-0 z-0 overflow-hidden">
+        <Tiles />
+      </div>
+      
       <SignedIn>
-        <div className="container mx-auto py-6 px-4 max-w-7xl min-h-[60vh] pb-40">
+        <div className="container mx-auto py-6 px-4 max-w-7xl min-h-[60vh] pb-40 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
             {/* Sidebar */}
             <div className="lg:col-span-1 space-y-4">
@@ -218,12 +397,15 @@ export default function ChatPage() {
                     <FileText className="h-5 w-5" />
                     Documents
                   </CardTitle>
+                  <div className="text-xs text-muted-foreground mt-1">
+                    Supported: PDF, DOCX, TXT files
+                  </div>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <input
                     type="file"
                     multiple
-                    accept=".pdf,.doc,.docx,.txt"
+                    accept=".pdf,.docx,.txt,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain"
                     style={{ display: "none" }}
                     ref={fileInputRef}
                     onChange={(e) => {
