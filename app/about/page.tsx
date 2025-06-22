@@ -181,7 +181,7 @@ export default function AboutPage() {
                       </div>
                       <div className="flex items-center gap-2">
                         <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-                        <span>Vector Embeddings (HuggingFace all-MiniLM-L6-v2)</span>
+                        <span>Vector Embeddings <br />(HuggingFace all-MiniLM-L6-v2)</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
@@ -191,10 +191,7 @@ export default function AboutPage() {
                         <div className="w-2 h-2 bg-red-500 rounded-full"></div>
                         <span>RAG Pipeline (LangChain + RetrievalQA)</span>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <div className="w-2 h-2 bg-sky-500 rounded-full"></div>
-                        <span>Web Scraping (Beautiful Soup)</span>
-                      </div>
+                    
                     </div>
                   </div>
                 </motion.div>
@@ -220,6 +217,10 @@ export default function AboutPage() {
                       <div className="flex items-center gap-2">
                         <div className="w-2 h-2 bg-teal-500 rounded-full"></div>
                         <span>FAST API</span>
+                      </div>
+                        <div className="flex items-center gap-2">
+                        <div className="w-2 h-2 bg-sky-500 rounded-full"></div>
+                        <span>Web Scraping (Beautiful Soup)</span>
                       </div>
                     </div>
                   </div>
