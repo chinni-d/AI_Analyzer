@@ -144,7 +144,7 @@ export default function HomePage() {
                   </CardHeader>
                   <CardContent>
                     <p className="text-sm text-black/40 dark:text-white/40">
-                      Easily upload your documents or enter a website URL, and let our AI process them for intelligent querying.
+                    Upload documents or URLs for instant AI analysis.
                     </p>
                   </CardContent>
                 </Card>
