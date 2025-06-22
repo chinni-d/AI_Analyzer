@@ -416,10 +416,13 @@ ${extractedText}`;
         formData.append("question", inputValue);
       }
 
-      const response = await fetch("https://docapi.dmanikanta.site/ask", {
-        method: "POST",
-        body: formData,
-      });
+      const response = await fetch(
+        "https://ai-analyzer-backend.vercel.app/api/ask",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
 
       if (!response.ok) {
         const errorText = await response.text();
@@ -1047,9 +1050,7 @@ Try asking questions like:
                           urlContent
                             ? "Ask about the URL content..."
                             : selectedFileIndex !== null
-                            ? `Ask about ${
-                                uploadedFiles[selectedFileIndex]?.name
-                              }...`
+                            ? `Ask about ${uploadedFiles[selectedFileIndex]?.name}...`
                             : activeTab === "url"
                             ? "Enter a URL or ask a question."
                             : "Select a file or ask a question."
