@@ -98,13 +98,13 @@ export default function HomePage() {
           {/* Hero Section */}
           <AnimatedSection>
             <div className="text-center space-y-4 mt-12 opacity-70">
-              <MorphingText texts={["Welcome", "to", "Document", "Analyzer"]} />
+              <MorphingText texts={["Welcome", "to", "AI", "Analyzer"]} />
               <h1 className="text-xl md:text-xl lg:text-xl font-bold tracking-tight">
-              Ask Questions About Your Documents
+             Get Answers from Your Documents and URLs Instantly
               </h1>
               <p className="text-base md:text-base max-w-base mx-auto text-black/80 dark:text-white/80">
-              Upload your documents and get instant, accurate answers using advanced Retrieval-Augmented Generation
-              (RAG) technology.
+              Upload your documents or provide URLs and get instant, accurate answers using advanced Retrieval-Augmented Generation
+                (RAG) technology.
               </p>
               <div className="flex flex-row gap-3 sm:gap-4 justify-center mt-8">
               <Button asChild size="lg" className="text-sm sm:text-base w-36 sm:w-auto">
@@ -137,12 +137,14 @@ export default function HomePage() {
                     <div className="mx-auto w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
                       <Upload className="h-6 w-6 text-primary" />
                     </div>
-                    <CardTitle className="opacity-80">Upload Documents</CardTitle>
-                    <CardDescription className="text-black/50 dark:text-white/40">Support for PDF, Word, and text files</CardDescription>
+                    <CardTitle className="opacity-80">Upload Source </CardTitle>
+                    <CardDescription className="text-black/50 dark:text-white/40">
+                      Supports adding website URLs, PDF, Word, and text files for analysis
+                    </CardDescription>
                   </CardHeader>
                   <CardContent>
                     <p className="text-sm text-black/40 dark:text-white/40">
-                      Easily upload your documents and let our AI process them for intelligent querying.
+                      Easily upload your documents or enter a website URL, and let our AI process them for intelligent querying.
                     </p>
                   </CardContent>
                 </Card>

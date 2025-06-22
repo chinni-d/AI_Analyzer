@@ -145,14 +145,14 @@ export function MainNav() {
                   <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary/10 border border-primary/20">
                     <Image 
                       src="/logo.png" 
-                      alt="Document Analyzer Logo" 
+                      alt="AI Analyzer Logo" 
                       width={20} 
                       height={20} 
                       className="h-5 w-5 invert dark:invert-0" 
                     />
                   </div>
                   <div className="flex flex-col">
-                    <span className="font-semibold text-sm text-foreground">Doc Analyzer</span>
+                    <span className="font-semibold text-sm text-foreground">AI Analyzer</span>
                     <span className="text-xs text-muted-foreground">AI Assistant</span>
                   </div>
                 </Link>
@@ -213,9 +213,9 @@ export function MainNav() {
         {/* Logo */}
         <div className="flex items-center min-w-0">
           <Link href="/" className="flex items-center gap-2">
-            <Image src="/logo.png" alt="Document Analyzer Logo" width={32} height={32} className="h-8 w-8 invert dark:invert-0" />
-            <span className="font-semibold hidden sm:inline-block">Document Analyzer</span>
-            <span className="font-semibold sm:hidden">Doc Analyzer</span>
+            <Image src="/logo.png" alt="AI Analyzer Logo" width={32} height={32} className="h-8 w-8 invert dark:invert-0" />
+            <span className="font-semibold hidden sm:inline-block">AI Analyzer</span>
+            <span className="font-semibold sm:hidden">AI Analyzer</span>
           </Link>
         </div>
 

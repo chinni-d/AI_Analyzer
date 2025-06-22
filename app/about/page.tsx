@@ -31,7 +31,7 @@ export default function AboutPage() {
       <div className="space-y-12">
         {/* Header */}
         <div className="text-center space-y-4">
-          <h1 className="text-4xl font-bold tracking-tight"><SparklesText text="About Document Analyzer" /></h1>
+          <h1 className="text-4xl font-bold tracking-tight"><SparklesText text="About AI Analyzer" /></h1>
           <p className="text-base text-black/40 dark:text-white/40 max-w-3xl mx-auto">
             Learn about our RAG-powered document analysis system and the technology behind intelligent document
             processing
@@ -50,7 +50,7 @@ export default function AboutPage() {
               </CardHeader>
             <CardContent className="space-y-6">
               <p className="text-black/40 dark:text-white/40 leading-relaxed text-sm lg:text-base">
-                The Document Analyzer is an advanced AI-powered application that enables users to upload documents and
+                The AI Analyzer is an advanced AI-powered application that enables users to upload documents or provide a URL and
                 ask natural language questions about their content. Built using cutting-edge Retrieval-Augmented
                 Generation (RAG) architecture, it combines the power of information retrieval with large language models
                 to provide accurate, contextual answers.
@@ -66,13 +66,14 @@ export default function AboutPage() {
                   Document Analysis
                 </Badge>
                 <Badge variant="secondary" className="text-sm">
-                  AI-Powered
+                  URL Analysis
                 </Badge>
-                <Badge variant="secondary" className="text-sm">
-                  Vector Search
-                </Badge>
+            
                 <Badge variant="secondary" className="text-sm">
                   Semantic Understanding
+                </Badge>
+                <Badge variant="secondary" className="text-sm">
+                  Semantic Search
                 </Badge>
               </div>
             </CardContent>
@@ -102,7 +103,7 @@ export default function AboutPage() {
                   <h3 className="text-xl font-semibold text-black/50 dark:text-white/40">1. Retrieval</h3>
                   <p className="text-black/40 dark:text-white/40 text-sm lg:text-base">
                     Relevant document chunks are retrieved based on semantic similarity to the user's question using
-                    advanced vector search.
+                    advanced semantic search.
                   </p>
                 </div>
 
@@ -190,6 +191,10 @@ export default function AboutPage() {
                         <div className="w-2 h-2 bg-red-500 rounded-full"></div>
                         <span>RAG Pipeline (LangChain + RetrievalQA)</span>
                       </div>
+                      <div className="flex items-center gap-2">
+                        <div className="w-2 h-2 bg-sky-500 rounded-full"></div>
+                        <span>Web Scraping (Beautiful Soup)</span>
+                      </div>
                     </div>
                   </div>
                 </motion.div>
@@ -250,7 +255,7 @@ export default function AboutPage() {
                     <div>
                       <h4 className="text-lg font-medium text-black/50 dark:text-white/40">Multi-format Support</h4>
                       <p className="text-black/40 dark:text-white/40 text-base lg:text-base">
-                        Works with PDF, Word documents, text files, and more with intelligent content extraction.
+                        Works with PDF, Word documents, text files, and live webpages with intelligent content extraction.
                       </p>
                     </div>
                   </div>
@@ -260,7 +265,7 @@ export default function AboutPage() {
                   <div>
                     <h4 className="text-lg font-medium text-black/50 dark:text-white/40">Fast Processing</h4>
                     <p className="text-black/40 dark:text-white/40 text-sm lg:text-base">
-                      Optimized vector search and caching for quick document retrieval and response generation.
+                      Optimized semantic search and caching for quick document retrieval and response generation.
                     </p>
                   </div>
 
@@ -283,7 +288,7 @@ export default function AboutPage() {
             <Card className="bg-transparent">
             <CardHeader>
               <CardTitle className="text-2xl opacity-80">Meet the Developer</CardTitle>
-              <CardDescription className="text-base text-black/40 dark:text-white/40">The creator behind this Document Analyzer</CardDescription>
+              <CardDescription className="text-base text-black/40 dark:text-white/40">The creator behind this AI Analyzer</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
@@ -337,7 +342,7 @@ export default function AboutPage() {
             <CardHeader>
               <CardTitle className="text-2xl text-center">Have any questions?</CardTitle>
               <CardDescription className="text-base text-black/40 dark:text-white/40 text-center">
-                Start a conversation with our Document Analyzer for more help.
+                Start a conversation with our AI Analyzer for more help.
               </CardDescription>
             </CardHeader>
             <CardContent className="text-center">

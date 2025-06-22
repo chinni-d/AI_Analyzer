@@ -8,7 +8,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Document Analyzer",
+  title: "AI Analyzer",
   description:
     "AI-powered document question answering system using RAG architecture",
   manifest: "/site.webmanifest",
