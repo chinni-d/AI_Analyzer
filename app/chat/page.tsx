@@ -1052,7 +1052,7 @@ Try asking questions like:
                             : selectedFileIndex !== null
                             ? `Ask about ${uploadedFiles[selectedFileIndex]?.name}...`
                             : activeTab === "url"
-                            ? "Enter a URL or ask a question."
+                            ? "Extract URL or ask a question."
                             : "Select a file or ask a question."
                         }
                         className="w-full pr-16 resize-none min-h-[48px] max-h-[200px] py-3 pl-4 text-base md:text-sm" // MODIFIED: text-sm to text-base md:text-sm
