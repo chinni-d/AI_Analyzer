@@ -177,7 +177,7 @@ export default function AboutPage() {
                     <div className="space-y-2 text-sm text-black/40 dark:text-white/40">
                       <div className="flex items-center gap-2">
                         <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                        <span>AI/LLM (OpenAI GPT-3.5 Turbo)</span>
+                        <span>AI/LLM (OpenAI gpt-4o-mini)</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
