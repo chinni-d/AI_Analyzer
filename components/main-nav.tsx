@@ -226,10 +226,10 @@ export function MainNav() {
         >
           {/* Animated indicator */}
           <div 
-            className="absolute -bottom-1 h-0.5 bg-primary rounded-full transition-all duration-300 ease-in-out"
+            className="absolute bottom-[-1.33rem] h-0.5 bg-primary rounded-full transition-all duration-300 ease-in-out"
             style={{
-              left: activeIndicator.left,
-              width: activeIndicator.width,
+              left: activeIndicator.left - 8,
+              width: activeIndicator.width + 16,
             }}
           />
           
@@ -239,7 +239,7 @@ export function MainNav() {
               href={item.href}
               data-href={item.href}
               className={cn(
-                "text-sm font-normal transition-colors hover:text-primary relative",
+                "text-semi-bold font-normal transition-colors hover:text-primary relative",
                 pathname === item.href ? "text-primary" : "text-muted-foreground",
               )}
             >
