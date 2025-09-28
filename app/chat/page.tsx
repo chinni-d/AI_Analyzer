@@ -223,7 +223,7 @@ export default function ChatPage() {
 
     try {
       const response = await fetch(
-        "https://webscrap-backend-iota.vercel.app/api/extract-url",
+        process.env.NEXT_PUBLIC_WEBSCRAP_API_URL!,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -417,7 +417,7 @@ ${extractedText}`;
       }
 
       const response = await fetch(
-        "https://ai-analyzer-backend.vercel.app/api/ask",
+        process.env.NEXT_PUBLIC_AI_ANALYZER_API_URL!,
         {
           method: "POST",
           body: formData,
