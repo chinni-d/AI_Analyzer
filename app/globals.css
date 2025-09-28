@@ -95,3 +95,102 @@ body {
     @apply mx-auto max-w-7xl px-4;
   }
 }
+
+/* Enhanced Scrollbar Styles */
+@layer components {
+  /* Webkit Scrollbar Styling (Chrome, Safari, Edge) */
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: hsl(var(--muted) / 0.1);
+    border-radius: 4px;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--muted-foreground) / 0.3) 0%,
+      hsl(var(--muted-foreground) / 0.5) 100%
+    );
+    border-radius: 4px;
+    border: 1px solid hsl(var(--background));
+    transition: all 0.2s ease;
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--muted-foreground) / 0.5) 0%,
+      hsl(var(--muted-foreground) / 0.7) 100%
+    );
+    transform: scale(1.1);
+    box-shadow: 0 2px 4px hsl(var(--muted-foreground) / 0.2);
+  }
+
+  *::-webkit-scrollbar-thumb:active {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--muted-foreground) / 0.7) 0%,
+      hsl(var(--muted-foreground) / 0.9) 100%
+    );
+    transform: scale(0.95);
+  }
+
+  *::-webkit-scrollbar-corner {
+    background: hsl(var(--background));
+  }
+
+  /* Firefox Scrollbar Styling */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--muted-foreground) / 0.4) hsl(var(--muted) / 0.1);
+  }
+
+  /* Enhanced hover states for scroll containers */
+  .scroll-area:hover *::-webkit-scrollbar-thumb {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--muted-foreground) / 0.4) 0%,
+      hsl(var(--muted-foreground) / 0.6) 100%
+    );
+  }
+
+  /* Smooth scrolling behavior */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Custom scrollbar variants */
+  .scrollbar-thin *::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  .scrollbar-thick *::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+
+  .scrollbar-minimal *::-webkit-scrollbar {
+    width: 2px;
+    height: 2px;
+  }
+
+  .scrollbar-minimal *::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted-foreground) / 0.6);
+    border: none;
+  }
+
+  /* Hide scrollbar but keep functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
