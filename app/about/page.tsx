@@ -1,4 +1,5 @@
 "use client";
+import { useEffect } from "react";
 import {
   Card,
   CardContent,
@@ -38,6 +39,11 @@ const pageVariants = {
 };
 
 export default function AboutPage() {
+  // Set dynamic page title
+  useEffect(() => {
+    document.title = "AI Analyzer | About";
+  }, []);
+
   return (
     <motion.div
       initial="initial"

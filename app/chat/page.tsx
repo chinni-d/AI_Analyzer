@@ -64,6 +64,11 @@ export default function ChatPage() {
   const urlInitialMessage =
     "Hello! I'm your AI assistant for web content. Paste a URL to extract its content, and then ask me any questions to get a summary or specific insights.";
 
+  // Set dynamic page title
+  useEffect(() => {
+    document.title = "AI Analyzer | Chat"
+  }, [])
+
   // Function to extract text content from different file types
   const extractTextFromFile = async (file: File): Promise<string | null> => {
     const fileExtension = "." + file.name.split(".").pop()?.toLowerCase();

@@ -1,12 +1,12 @@
 "use client"
 
+import { useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { ArrowRight, Upload, MessageSquare, Brain } from "lucide-react"
 import Link from "next/link"
 import { MorphingText } from "@/components/liquid-text"
 import { motion, useAnimation } from "framer-motion"
-import { useEffect } from "react"
 import { useInView } from "react-intersection-observer"
 
 const sectionVariants = {
@@ -91,6 +91,11 @@ function AnimatedCard({ children, delay = 0 }: { children: React.ReactNode, dela
 
 
 export default function HomePage() {
+  // Set dynamic page title
+  useEffect(() => {
+    document.title = "AI Analyzer | Home"
+  }, [])
+
   return (
     <div className="flex flex-col min-h-screen overflow-y-auto">
       <div className="flex-1 p-4 md:p-6 lg:p-8">
