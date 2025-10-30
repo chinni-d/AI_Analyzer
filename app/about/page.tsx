@@ -384,7 +384,7 @@ export default function AboutPage() {
               <CardContent>
                 <div className="flex flex-col md:flex-row gap-8 items-center md:items-start">
                   <Avatar className="w-32 h-32">
-                    <AvatarImage src="img1.png" alt="Developer" />
+                    <AvatarImage src="me.png" alt="Developer" />
                     <AvatarFallback className="text-2xl">MD</AvatarFallback>
                   </Avatar>
                   <div className="flex-1 text-center md:text-left space-y-4">
