@@ -25,8 +25,9 @@ import {
 import Link from "next/link";
 import { SparklesText } from "@/components/sparkles-text";
 import { motion } from "framer-motion";
+import type { Variants } from "framer-motion";
 
-const pageVariants = {
+const pageVariants: Variants = {
   initial: { opacity: 0, y: 60 },
   animate: {
     opacity: 1,
