@@ -22,11 +22,11 @@ const useMorphingText = (texts: string[]) => {
       const [current1, current2] = [text1Ref.current, text2Ref.current];
       if (!current1 || !current2 || !texts || texts.length === 0) return;
 
-      current2.style.filter = `blur(${Math.min(8 / fraction - 8, 100)}px)`;
+      current2.style.filter = `blur(${Math.min(4 / fraction - 4, 12)}px)`;
       current2.style.opacity = `${Math.pow(fraction, 0.4) * 100}%`;
 
       const invertedFraction = 1 - fraction;
-      current1.style.filter = `blur(${Math.min(8 / invertedFraction - 8, 100)}px)`;
+      current1.style.filter = `blur(${Math.min(4 / invertedFraction - 4, 12)}px)`;
       current1.style.opacity = `${Math.pow(invertedFraction, 0.4) * 100}%`;
 
       current1.textContent = texts[textIndexRef.current % texts.length];
@@ -99,11 +99,11 @@ const Texts: React.FC<Pick<MorphingTextProps, "texts">> = ({ texts }) => {
   return (
     <>
       <span
-        className="absolute inset-x-0 top-0 m-auto inline-block w-full"
+        className="absolute inset-x-0 top-0 m-auto inline-block w-full will-change-[filter,opacity] [transform:translateZ(0)]"
         ref={text1Ref}
       />
       <span
-        className="absolute inset-x-0 top-0 m-auto inline-block w-full"
+        className="absolute inset-x-0 top-0 m-auto inline-block w-full will-change-[filter,opacity] [transform:translateZ(0)]"
         ref={text2Ref}
       />
     </>
